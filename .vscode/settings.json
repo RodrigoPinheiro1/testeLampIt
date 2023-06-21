@@ -1,0 +1,5 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "maven.executable.path": "/home/esleymadeira/.asdf/installs/maven/3.8.6/bin/mvn",
+    "java.compile.nullAnalysis.mode": "automatic"
+}
