@@ -13,6 +13,7 @@ spring:
     multipart:
       max-file-size: 50MB
   datasource:
+
     name: teste_db
     driver-class-name: org.h2.Driver
     url: jdbc:h2:./data/teste
@@ -20,11 +21,14 @@ spring:
     password: 
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: create-drop
   sql:
+
     init:
       platform: org.hibernate.dialect.H2Dialect
       mode: always
 server:
   port: 8080
 
-allowedHosts: http://localhost:4200,*
+#allowedHosts: http://localhost:4200,*
