@@ -18,19 +18,19 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 @Api(tags = "Auth controller")
 public class AuthenticationUserController {
-
-    @Autowired
-    private AuthenticateUserService service;
-
-    @PostMapping("/login")
-    @ApiOperation(value = "Endpoint de login para utilização do restante dos endpoints", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserLoginDto> login(@Valid @RequestBody LoginRequestDto dto) throws Exception {
-
-        UserLoginDto userDto = service.login(dto.getUsername(), dto.getPassword());
-
-        HttpHeaders header = new HttpHeaders();
-        header.set("Authorization", userDto.getToken());
-        return ResponseEntity.ok().headers(header).body(userDto);
-    }
+//
+//    @Autowired
+//    private AuthenticateUserService service;
+//
+//    @PostMapping("/login")
+//    @ApiOperation(value = "Endpoint de login para utilização do restante dos endpoints", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<UserLoginDto> login(@Valid @RequestBody LoginRequestDto dto) throws Exception {
+//
+//        UserLoginDto userDto = service.login(dto.getUsername(), dto.getPassword());
+//
+//        HttpHeaders header = new HttpHeaders();
+//        header.set("Authorization", userDto.getToken());
+//        return ResponseEntity.ok().headers(header).body(userDto);
+//    }
 
 }

@@ -1,17 +1,20 @@
 package br.com.lamppit.teste.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import br.com.lamppit.teste.model.Usuario;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserLoginDto {
+public class EmpresaDto {
 
-    private Usuario user;
-    private String token;
+
+    private Long id;
+    private String nome;
+    private String cnpj;
+
+
+
 }

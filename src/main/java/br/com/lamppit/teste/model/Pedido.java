@@ -24,11 +24,14 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Enumerated(EnumType.STRING)
-    private FormaPagamento formaPagamento;
+   // @Enumerated(EnumType.STRING)
+    private String formaPagamento;
 
-    @Enumerated(EnumType.STRING)
-    private FormaEntrega formaEntrega;
+   // @Enumerated(EnumType.STRING)
+    private String formaEntrega;
+
+    @ManyToOne
+    private Usuario usuario;
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "pedido")

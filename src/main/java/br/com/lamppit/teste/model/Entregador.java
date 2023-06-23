@@ -5,27 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Produto {
+public class Entregador extends Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nome;
-    private Integer quantidade;
-
-    private String descricao;
-
-    @ManyToOne
-    private Empresa empresa;
-
-    @ManyToOne
-    private Pedido pedido;
-
 
 }
