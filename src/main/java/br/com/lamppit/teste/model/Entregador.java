@@ -18,4 +18,9 @@ public class Entregador extends Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @OneToMany(mappedBy = "entregador",cascade = CascadeType.ALL)
+    private List<Pedido> pedidos = new ArrayList<>();
+
+
 }

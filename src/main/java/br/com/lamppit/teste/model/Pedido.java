@@ -1,5 +1,6 @@
 package br.com.lamppit.teste.model;
 
+import br.com.lamppit.teste.dto.EntregadorDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,8 +32,11 @@ public class Pedido {
     private String formaEntrega;
 
     @ManyToOne
-    private Usuario usuario;
+    private Entregador entregador;
 
+
+    @ManyToOne
+    private Empresa empresa;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "pedido")
     private List<Produto> produtos = new ArrayList<>();

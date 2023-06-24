@@ -28,18 +28,15 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 3, message = "{field.size}")
-    @NotNull(message = "{field.notnull}")
-    @NotEmpty(message = "{field.notempty}")
-    @Pattern(regexp = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\\s]+$", message = "{field.pattern.notNumber}")
+//    @Size(min = 3, message = "{field.size}")
+//    @NotNull(message = "{field.notnull}")
+//    @NotEmpty(message = "{field.notempty}")
+//    @Pattern(regexp = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\\s]+$", message = "{field.pattern.notNumber}")
     private String nome;
 
 //    @Email(message = "{field.email}")
 //    @NotNull(message = "{field.notnull}")
     private String email;
-
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-    private List<Pedido> pedidos = new ArrayList<>();
 
    // @NotNull(message = "{field.notnull}")
     //@NotEmpty(message = "{field.notempty}")

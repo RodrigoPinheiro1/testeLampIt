@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Empresa extends  Usuario{
+public class Empresa extends  Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,9 @@ public class Empresa extends  Usuario{
 
 
     private String cnpj;
+
+    @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
+    private List<Pedido> pedidos = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
