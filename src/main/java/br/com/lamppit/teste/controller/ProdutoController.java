@@ -1,6 +1,7 @@
 package br.com.lamppit.teste.controller;
 
 import br.com.lamppit.teste.dto.ProdutoDto;
+import br.com.lamppit.teste.dto.ProdutoIdDto;
 import br.com.lamppit.teste.service.impl.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ProdutoController {
 
 
     @PostMapping("/{id}")
-    public ResponseEntity<ProdutoDto> cadastrarProduto (@RequestBody ProdutoDto dto,
+    public ResponseEntity<ProdutoDto> cadastrarProduto (@RequestBody ProdutoIdDto dto,
                                                         UriComponentsBuilder builder, @PathVariable Long id){
 
         ProdutoDto produtoDto = produtoService.cadastrarProduto(dto,id);

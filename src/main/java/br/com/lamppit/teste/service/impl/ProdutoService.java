@@ -1,6 +1,7 @@
 package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.ProdutoDto;
+import br.com.lamppit.teste.dto.ProdutoIdDto;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Produto;
 import br.com.lamppit.teste.repository.EmpresaRepository;
@@ -23,7 +24,7 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
 
-    public ProdutoDto cadastrarProduto(ProdutoDto dto, Long id) {
+    public ProdutoDto cadastrarProduto(ProdutoIdDto dto, Long id) {
 
         Produto produto = modelMapper.map(dto, Produto.class);
 

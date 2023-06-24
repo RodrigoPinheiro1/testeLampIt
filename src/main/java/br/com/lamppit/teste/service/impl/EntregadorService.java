@@ -22,6 +22,7 @@ public class EntregadorService {
     private EntregadorRepository entregadorRepository;
 
 
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
