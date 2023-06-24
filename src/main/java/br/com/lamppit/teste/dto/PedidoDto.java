@@ -1,5 +1,6 @@
 package br.com.lamppit.teste.dto;
 
+import br.com.lamppit.teste.model.Entregador;
 import br.com.lamppit.teste.model.FormaEntrega;
 import br.com.lamppit.teste.model.FormaPagamento;
 import br.com.lamppit.teste.model.Status;
@@ -26,6 +27,8 @@ public class PedidoDto {
     private String formaPagamento;
 
     private String formaEntrega;
+
+    private EntregadorDto entregador;
     private List<ProdutoDto> produtos = new ArrayList<>();
 
 }

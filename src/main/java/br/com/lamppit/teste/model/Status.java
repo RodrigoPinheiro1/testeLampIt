@@ -6,7 +6,7 @@ public enum Status {
     EM_ATENDIMENTO,
     CONCLUIDO,
 
-    ENTREGANDO,
+    ENTREGA_CONFIRMADA,
 
     ENTREGUE,
    
