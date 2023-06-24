@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,8 @@ public class PedidoDto {
     private String formaEntrega;
 
     private EntregadorDto entregador;
-    private List<ProdutoDto> produtos = new ArrayList<>();
+    @NotNull
+    @Valid
+    private List<ProdutoDtoId> produtos = new ArrayList<>();
 
 }

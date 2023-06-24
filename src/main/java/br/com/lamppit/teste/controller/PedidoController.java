@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -20,7 +21,7 @@ public class PedidoController {
 
 
     @PostMapping
-    public ResponseEntity<PedidoDto> cadastrarPedido(@RequestBody PedidoDto dto,
+    public ResponseEntity<PedidoDto> cadastrarPedido(@RequestBody @Valid PedidoDto dto,
                                                      UriComponentsBuilder builder) {
 
         PedidoDto pedidoDto = produtoService.cadastrarPedido(dto);

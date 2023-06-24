@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,13 @@ import java.util.List;
 public class EmpresaProdutoDto {
 
     private Long id;
+    @NotNull
     private String nome;
+    @NotNull
     private String cnpj;
+
+    @Valid
+    @NotNull
     private List<ProdutoDto> produtos = new ArrayList<>();
 
 }

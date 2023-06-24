@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -25,7 +26,7 @@ public class EntregadorController {
 
 
     @PostMapping
-    public ResponseEntity<EntregadorDto> cadastrarEntregador(@RequestBody EntregadorDto dto,
+    public ResponseEntity<EntregadorDto> cadastrarEntregador(@RequestBody @Valid EntregadorDto dto,
                                                              UriComponentsBuilder builder) {
 
         EntregadorDto entregadorDto = entregadorService.cadastrarEntregador(dto);
@@ -38,7 +39,7 @@ public class EntregadorController {
     }
 
     @PutMapping("pedido/{id}")
-    public ResponseEntity<EntregadorPedidoDto> cadastrarProduto(@RequestBody PedidoIdDto dto,
+    public ResponseEntity<EntregadorPedidoDto> cadastrarProduto(@RequestBody @Valid PedidoIdDto dto,
                                                                 @PathVariable Long id) {
 
         EntregadorPedidoDto entregadorPedidoDto = entregadorService.aceitarDelivery(dto, id);

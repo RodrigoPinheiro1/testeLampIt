@@ -1,7 +1,8 @@
 package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.ProdutoDto;
-import br.com.lamppit.teste.dto.ProdutoIdDto;
+import br.com.lamppit.teste.dto.ProdutoEmpresaDto;
+import br.com.lamppit.teste.exceptions.ProductNotFound;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Produto;
 import br.com.lamppit.teste.repository.EmpresaRepository;
@@ -17,6 +18,7 @@ public class ProdutoService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Autowired
     private EmpresaRepository empresaRepository;
 
@@ -24,7 +26,7 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
 
-    public ProdutoDto cadastrarProduto(ProdutoIdDto dto, Long id) {
+    public ProdutoEmpresaDto cadastrarProduto(ProdutoDto dto, Long id) {
 
         Produto produto = modelMapper.map(dto, Produto.class);
 
@@ -35,7 +37,9 @@ public class ProdutoService {
 
         produtoRepository.save(produto);
 
-        return modelMapper.map(produto, ProdutoDto.class);
+        return modelMapper.map(produto, ProdutoEmpresaDto.class);
 
     }
+
+
 }

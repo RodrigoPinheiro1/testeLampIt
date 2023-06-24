@@ -1,8 +1,6 @@
 package br.com.lamppit.teste.controller;
 
-import br.com.lamppit.teste.dto.EmpresaDto;
-import br.com.lamppit.teste.dto.EmpresaProdutoDto;
-import br.com.lamppit.teste.dto.ListProdutoDto;
+import br.com.lamppit.teste.dto.*;
 import br.com.lamppit.teste.model.Produto;
 import br.com.lamppit.teste.service.impl.EmpresaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/empresa")
@@ -24,7 +24,7 @@ public class EmpresaController {
 
 
     @PostMapping
-    public ResponseEntity<EmpresaProdutoDto> cadastrarEmpresa(@RequestBody EmpresaProdutoDto dto, UriComponentsBuilder builder){
+    public ResponseEntity<EmpresaProdutoDto> cadastrarEmpresa(@RequestBody @Valid EmpresaProdutoDto dto, UriComponentsBuilder builder){
 
         EmpresaProdutoDto empresaDto = empresaService.cadastrarEmpresa(dto);
 
@@ -32,7 +32,6 @@ public class EmpresaController {
         return ResponseEntity.created(uri).body(empresaDto);
 
     }
-
 
 
     @GetMapping

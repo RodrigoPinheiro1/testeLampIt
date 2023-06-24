@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class UsuarioNotFound extends RuntimeException {
+public class ProductNotFound extends RuntimeException {
 
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(UsuarioNotFound.class)
+    @ExceptionHandler(ProductNotFound.class)
     public ResponseEntity<MessageGlobalException> usuarioNotFound() {
 
-        MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), "usuario nao existe");
+        MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Produto nao existe");
 
         return new ResponseEntity<>(messageGlobalException, HttpStatus.NOT_FOUND);
     }

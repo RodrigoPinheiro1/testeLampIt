@@ -20,10 +20,13 @@ public class PedidoService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private NotFoundService notFoundService;
+    @Autowired
     private ProdutoRepository produtoRepository;
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
 
     public PedidoDto cadastrarPedido(PedidoDto dto) {
 
@@ -34,6 +37,7 @@ public class PedidoService {
 
         pedido.getProdutos().forEach(produto ->
         {
+            notFoundService.seProdutoExiste(produto.getId());
             produto = produtoRepository.getReferenceById(produto.getId());
             produto.setPedido(pedido);
             pedido.setProdutos(Collections.singletonList(produto));
@@ -62,11 +66,20 @@ public class PedidoService {
 
     public PedidoDto atualizarPedidoParaEmAtendimento(Long id) {
 
-
+        notFoundService.sePedidoExiste(id);
         Pedido pedido = pedidoRepository.getReferenceById(id);
-
         pedido.setId(id);
         pedido.setStatus(Status.EM_ATENDIMENTO);
+
+        return getPedidoDto(pedido);
+    }
+
+    private PedidoDto getPedidoDto(Pedido pedido) {
+        pedido.setDataPedido(pedido.getDataPedido());
+        pedido.setEntregador(pedido.getEntregador());
+        pedido.setEmpresa(pedido.getEmpresa());
+        pedido.setFormaEntrega(pedido.getFormaEntrega());
+        pedido.setFormaPagamento(pedido.getFormaPagamento());
 
         pedidoRepository.save(pedido);
 
@@ -76,25 +89,23 @@ public class PedidoService {
 
     public PedidoDto atualizarPedidoConcluido(Long id) {
 
-
+        notFoundService.sePedidoExiste(id);
         Pedido pedido = pedidoRepository.getReferenceById(id);
 
         pedido.setId(id);
         pedido.setStatus(Status.CONCLUIDO);
-
-        pedidoRepository.save(pedido);
-
-        return modelMapper.map(pedido, PedidoDto.class);
+        return getPedidoDto(pedido);
     }
 
     public PedidoDto atualizarPedidoParaEntregue(Long id) {
 
+        notFoundService.sePedidoExiste(id);
         Pedido pedido = pedidoRepository.getReferenceById(id);
 
         pedido.setId(id);
         pedido.setStatus(Status.ENTREGUE);
 
-        return modelMapper.map(pedido,PedidoDto.class);
+        return getPedidoDto(pedido);
     }
     public Page<PedidoDto> pedidosNaoEntregues(Pageable pageable) {
 

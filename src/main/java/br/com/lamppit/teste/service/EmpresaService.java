@@ -10,7 +10,7 @@ public interface EmpresaService {
 
 
 
-    EmpresaProdutoDto cadastrarEmpresa(EmpresaProdutoDto empresaDto);
+    EmpresaDto cadastrarEmpresa(EmpresaDto empresaDto);
 
     EmpresaProdutoDto cadastrarProdutoEmpresa(ListProdutoDto dto, Long id);
 }
