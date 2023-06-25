@@ -15,7 +15,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
 
 
-    @Query("select p from Pedido p where p.status = 'ANDAMENTO'")
+    @Query("select p from Pedido p where p.status = 'CADASTRADO'")
     Page<Pedido> pedidosStatusEmAndamento(Pageable pageable);
 
     @Query("select p from Pedido p where p.status = 'CONCLUIDO' or p.status = 'EM_ATENDIMENTO'" )

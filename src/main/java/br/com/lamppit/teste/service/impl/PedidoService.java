@@ -56,7 +56,7 @@ public class PedidoService {
 
         pedido.setCliente(cliente);
         pedido.setEmpresa(empresa);
-        pedido.setStatus(Status.ANDAMENTO);
+        pedido.setStatus(Status.CADASTRADO);
         pedido.setDataPedido(LocalDateTime.now());
 
         pedido.getProdutos().forEach(produto ->
@@ -92,7 +92,7 @@ public class PedidoService {
         notFoundService.sePedidoExiste(id);
         Pedido pedido = pedidoRepository.getReferenceById(id);
 
-        if (pedido.getStatus() == Status.ANDAMENTO) {
+        if (pedido.getStatus() == Status.CADASTRADO) {
 
             pedido.setId(id);
             pedido.setStatus(Status.EM_ATENDIMENTO);
@@ -123,34 +123,6 @@ public class PedidoService {
         return modelMapper.map(pedido, PedidoDto.class);
     }
 
-
-    public PedidoDto atualizarPedidoConcluido(Long id) {
-
-        notFoundService.sePedidoExiste(id);
-        Pedido pedido = pedidoRepository.getReferenceById(id);
-
-        pedido.setId(id);
-        pedido.setStatus(Status.CONCLUIDO);
-        return getPedidoDto(pedido);
-    }
-
-    public PedidoDto atualizarPedidoParaEntregue(Long id) {
-
-
-        notFoundService.sePedidoExiste(id);
-        Pedido pedido = pedidoRepository.getReferenceById(id);
-
-        if (pedido.getStatus() == Status.EM_ATENDIMENTO) {
-
-            throw new RuntimeException("");
-        }
-        pedido.setId(id);
-        pedido.setStatus(Status.ENTREGUE);
-
-        return getPedidoDto(pedido);
-
-
-    }
 
     public Page<PedidoDto> pedidosNaoEntregues(Pageable pageable) {
 

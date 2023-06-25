@@ -3,8 +3,11 @@ package br.com.lamppit.teste.controller;
 
 import br.com.lamppit.teste.dto.*;
 import br.com.lamppit.teste.service.impl.EntregadorService;
+import br.com.lamppit.teste.service.impl.PedidoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,11 +19,9 @@ import java.net.URI;
 @RequestMapping("/entregador")
 public class EntregadorController {
 
-    //fazer cadastro entregador,
 
-    //fazer vinculo com o pedido e entregador,
-//    avisar a loja  quando ele for buscar.
-
+    @Autowired
+    private PedidoService produtoService;
     @Autowired
     private EntregadorService entregadorService;
 
@@ -38,14 +39,20 @@ public class EntregadorController {
 
     }
 
-    @PutMapping("/pedido/{id}")
-    public ResponseEntity<EntregadorPedidoDto> cadastrarProduto(@RequestBody @Valid PedidoIdDto dto,
+    @PutMapping("/pedido/aceitarDelivery/{id}")
+    public ResponseEntity<EntregadorPedidoDto> aceitarDelivery(@RequestBody @Valid PedidoIdDto dto,
                                                                 @PathVariable Long id) {
 
         EntregadorPedidoDto entregadorPedidoDto = entregadorService.aceitarDelivery(dto, id);
 
         return ResponseEntity.ok(entregadorPedidoDto);
 
+    }
+
+    @GetMapping("/pedido/entregar")
+    public Page<PedidoDto> pedidosDisponivelEntrega (Pageable pageable) {
+
+        return produtoService.pedidosDisponiveisEntrega(pageable);
     }
 
 

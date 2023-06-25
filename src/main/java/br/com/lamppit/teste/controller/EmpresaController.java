@@ -2,6 +2,7 @@ package br.com.lamppit.teste.controller;
 
 import br.com.lamppit.teste.dto.*;
 import br.com.lamppit.teste.service.impl.EmpresaServiceImpl;
+import br.com.lamppit.teste.service.impl.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,9 @@ public class EmpresaController {
     @Autowired
     private EmpresaServiceImpl empresaService;
 
+    @Autowired
+    private PedidoService produtoService;
+
 
     @PostMapping
     public ResponseEntity<EmpresaProdutoDto> cadastrarEmpresa(@RequestBody @Valid EmpresaProdutoDto dto, UriComponentsBuilder builder){
@@ -31,11 +35,16 @@ public class EmpresaController {
 
     }
 
+    @GetMapping("/pedido/andamento")
+    public Page<PedidoDto> pedidosStatusEmAndamento(Pageable pageable) {
+        return produtoService.pedidosStatusEmAndamento(pageable);
+    }
+
 
     @GetMapping
     public Page<EmpresaProdutoDto> EmpresasDisponiveis (Pageable pageable) {
 
-        return empresaService.paginacaoEmpresas(pageable);
+        return empresaService.EmpresasDisponiveis(pageable);
     }
 
     @PatchMapping("/fechar/{id}")

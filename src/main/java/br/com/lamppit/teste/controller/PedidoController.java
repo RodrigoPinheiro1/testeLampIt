@@ -32,55 +32,18 @@ public class PedidoController {
 
     }
 
-    @GetMapping("/andamento")
-    public Page<PedidoDto> pedidosStatusEmAndamento(Pageable pageable) {
-        return produtoService.pedidosStatusEmAndamento(pageable);
-    }
-
-    @GetMapping("/naoEntregue")
-    public Page<PedidoDto> pedidosNaoEntregues (Pageable pageable) {
-
-        return produtoService.pedidosNaoEntregues(pageable);
-    }
-
-    @GetMapping("/entregar")
-    public Page<PedidoDto> pedidosDisponivelEntrega (Pageable pageable) {
-
-        return produtoService.pedidosDisponiveisEntrega(pageable);
-    }
-
-
-
     @GetMapping
     public Page<PedidoDto> pedidos (Pageable pageable) {
 
         return produtoService.pedidos(pageable);
     }
 
-
-    @PatchMapping("/atualizarStatus/{id}")
+    @PatchMapping("/empresa/atualizarStatus/{id}")
     public ResponseEntity<PedidoDto> atualizaPedidoParaEmAtendimento(@PathVariable Long id) {
 
         PedidoDto pedidoDto = produtoService.atualizarPedidoParaEmAtendimento(id);
 
         return ResponseEntity.ok(pedidoDto);
     }
-//
-//    @PatchMapping("/entregue/{id}")
-//    public ResponseEntity<PedidoDto> atualizaPedidoParaEntregue(@PathVariable Long id ) {
-//
-//        PedidoDto pedidoDto = produtoService.atualizarPedidoParaEntregue(id);
-//
-//        return ResponseEntity.ok(pedidoDto);
-//    }
-//
-//    @PatchMapping("/concluido/{id}")
-//    public ResponseEntity<PedidoDto> atualizarStatusPedidoConcluido( @PathVariable Long id) {
-//
-//        PedidoDto pedidoDto = produtoService.atualizarPedidoConcluido(id);
-//
-//        return ResponseEntity.ok(pedidoDto);
-//    }
-
 
 }

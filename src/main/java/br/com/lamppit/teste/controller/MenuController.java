@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/cliente/menu")
 public class MenuController {
 
 
@@ -23,7 +23,7 @@ public class MenuController {
     @GetMapping
     public Page<EmpresaDto> paginacaoEmpresa(Pageable pageable) {
 
-     return  empresaService.paginacaoEmpresa(pageable);
+     return  empresaService.EmpresasDisponiveisNomes(pageable);
     }
 
     @GetMapping("/{id}")

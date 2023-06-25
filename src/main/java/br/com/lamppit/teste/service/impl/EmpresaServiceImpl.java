@@ -43,15 +43,16 @@ public class EmpresaServiceImpl {
     }
 
 
-    public Page<EmpresaProdutoDto> paginacaoEmpresas(Pageable pageable) {
+    public Page<EmpresaProdutoDto> EmpresasDisponiveis(Pageable pageable) {
 
         return empresaRepository.acharEmpresasQueTenhamProdutos(pageable).map(empresa ->
                 modelMapper.map(empresa, EmpresaProdutoDto.class));
     }
 
-    public Page<EmpresaDto> paginacaoEmpresa(Pageable pageable) {
-        return empresaRepository.findAll(pageable).
-                map(empresa -> modelMapper.map(empresa, EmpresaDto.class));
+    public Page<EmpresaDto> EmpresasDisponiveisNomes(Pageable pageable) {
+
+        return empresaRepository.acharEmpresasQueTenhamProdutos(pageable).map(empresa ->
+                modelMapper.map(empresa, EmpresaDto.class));
     }
 
     public Page<ListProdutoDto> listarProdutos(Pageable pageable, Long id) {
