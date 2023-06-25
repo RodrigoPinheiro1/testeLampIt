@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class EntregadorNotFound extends RuntimeException {
+public class PedidoNotFoundException extends RuntimeException {
 
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(EntregadorNotFound.class)
+    @ExceptionHandler(PedidoNotFoundException.class)
     public ResponseEntity<MessageGlobalException> usuarioNotFound() {
 
-        MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Entregador nao existe");
+        MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Pedido nao existe");
 
         return new ResponseEntity<>(messageGlobalException, HttpStatus.NOT_FOUND);
     }
