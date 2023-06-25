@@ -2,6 +2,8 @@ package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.PedidoDto;
 import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
+import br.com.lamppit.teste.exceptions.AguardarConfirmarEntregaException;
+import br.com.lamppit.teste.exceptions.EmpresaFechadaException;
 import br.com.lamppit.teste.model.Cliente;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Pedido;
@@ -43,10 +45,13 @@ public class PedidoService {
 
         Pedido pedido = modelMapper.map(dto, Pedido.class);
 
+        notFoundService.seExisteEmpresa(dto.getEmpresaId());
+        notFoundService.seClienteExiste(idCliente);
 
         Cliente cliente = clienteRepository.getReferenceById(idCliente);
         Empresa empresa = empresaRepository.getReferenceById(dto.getEmpresaId());
 
+        empresaRepository.seEmpresaEstaAberto(dto.getEmpresaId()).orElseThrow(EmpresaFechadaException::new);
 
 
         pedido.setCliente(cliente);
@@ -81,17 +86,30 @@ public class PedidoService {
     }
 
 
-
-
     public PedidoDto atualizarPedidoParaEmAtendimento(Long id) {
+
 
         notFoundService.sePedidoExiste(id);
         Pedido pedido = pedidoRepository.getReferenceById(id);
-        pedido.setId(id);
-        pedido.setStatus(Status.EM_ATENDIMENTO);
 
-        return getPedidoDto(pedido);
+        if (pedido.getStatus() == Status.ANDAMENTO) {
+
+            pedido.setId(id);
+            pedido.setStatus(Status.EM_ATENDIMENTO);
+            return getPedidoDto(pedido);
+        } else if (pedido.getStatus() == Status.EM_ATENDIMENTO) {
+            pedido.setId(id);
+            pedido.setStatus(Status.CONCLUIDO);
+            return getPedidoDto(pedido);
+        } else if (pedido.getStatus() ==Status.CONCLUIDO) {
+           throw new AguardarConfirmarEntregaException();
+        } else if(pedido.getStatus() == Status.ENTREGA_CONFIRMADA) {
+            throw new AguardarConfirmarEntregaException();
+        }
+        throw new AguardarConfirmarEntregaException();
     }
+
+
 
     private PedidoDto getPedidoDto(Pedido pedido) {
         pedido.setDataPedido(pedido.getDataPedido());
@@ -118,24 +136,32 @@ public class PedidoService {
 
     public PedidoDto atualizarPedidoParaEntregue(Long id) {
 
+
         notFoundService.sePedidoExiste(id);
         Pedido pedido = pedidoRepository.getReferenceById(id);
 
+        if (pedido.getStatus() == Status.EM_ATENDIMENTO) {
+
+            throw new RuntimeException("");
+        }
         pedido.setId(id);
         pedido.setStatus(Status.ENTREGUE);
 
         return getPedidoDto(pedido);
+
+
     }
+
     public Page<PedidoDto> pedidosNaoEntregues(Pageable pageable) {
 
         return pedidoRepository.pedidosStatusNaoEntregue(pageable)
-                .map(pedido -> modelMapper.map(pedido,PedidoDto.class));
+                .map(pedido -> modelMapper.map(pedido, PedidoDto.class));
 
     }
 
 
     public Page<PedidoDto> pedidos(Pageable pageable) {
 
-        return pedidoRepository.findAll(pageable).map(pedido -> modelMapper.map(pedido,PedidoDto.class));
+        return pedidoRepository.findAll(pageable).map(pedido -> modelMapper.map(pedido, PedidoDto.class));
     }
 }

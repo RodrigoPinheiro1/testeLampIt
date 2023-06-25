@@ -16,7 +16,7 @@ public class ClienteNotFoundException extends RuntimeException {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ClienteNotFoundException.class)
-    public ResponseEntity<MessageGlobalException> usuarioNotFound() {
+    public ResponseEntity<MessageGlobalException> clienteNotFoundException() {
 
         MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Cliente nao existe");
 

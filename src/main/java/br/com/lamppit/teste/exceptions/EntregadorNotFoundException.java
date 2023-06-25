@@ -16,7 +16,7 @@ public class EntregadorNotFoundException extends RuntimeException {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntregadorNotFoundException.class)
-    public ResponseEntity<MessageGlobalException> usuarioNotFound() {
+    public ResponseEntity<MessageGlobalException> entregadorNotFound() {
 
         MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Entregador nao existe");
 

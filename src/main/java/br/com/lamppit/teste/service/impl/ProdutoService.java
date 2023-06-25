@@ -2,7 +2,6 @@ package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.ProdutoDto;
 import br.com.lamppit.teste.dto.ProdutoEmpresaDto;
-import br.com.lamppit.teste.exceptions.ProductNotFound;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Produto;
 import br.com.lamppit.teste.repository.EmpresaRepository;

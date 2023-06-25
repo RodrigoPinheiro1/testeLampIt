@@ -38,7 +38,7 @@ public class EntregadorController {
 
     }
 
-    @PutMapping("pedido/{id}")
+    @PutMapping("/pedido/{id}")
     public ResponseEntity<EntregadorPedidoDto> cadastrarProduto(@RequestBody @Valid PedidoIdDto dto,
                                                                 @PathVariable Long id) {
 

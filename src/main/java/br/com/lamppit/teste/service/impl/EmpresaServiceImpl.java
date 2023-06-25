@@ -4,11 +4,9 @@ package br.com.lamppit.teste.service.impl;
 import br.com.lamppit.teste.dto.EmpresaDto;
 import br.com.lamppit.teste.dto.EmpresaProdutoDto;
 import br.com.lamppit.teste.dto.ListProdutoDto;
-import br.com.lamppit.teste.exceptions.ProductNotFound;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.StatusLoja;
 import br.com.lamppit.teste.repository.EmpresaRepository;
-import br.com.lamppit.teste.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +18,6 @@ public class EmpresaServiceImpl {
 
     @Autowired
     private EmpresaRepository empresaRepository;
-
-    @Autowired
-    private ProdutoRepository produtoRepository;
-
 
     @Autowired
     private NotFoundService notFoundService;
@@ -49,10 +43,9 @@ public class EmpresaServiceImpl {
     }
 
 
+    public Page<EmpresaProdutoDto> paginacaoEmpresas(Pageable pageable) {
 
-    public Page<EmpresaProdutoDto> paginacao(Pageable pageable) {
-
-        return empresaRepository.findAll(pageable).map(empresa ->
+        return empresaRepository.acharEmpresasQueTenhamProdutos(pageable).map(empresa ->
                 modelMapper.map(empresa, EmpresaProdutoDto.class));
     }
 
@@ -77,9 +70,30 @@ public class EmpresaServiceImpl {
 
         Empresa empresa = empresaRepository.getReferenceById(id);
 
+        empresa.setId(id);
+        empresa.setNome(empresa.getNome());
+        empresa.setCnpj(empresa.getCnpj());
         empresa.setStatusLoja(StatusLoja.FECHADO);
 
-        return modelMapper.map(empresa,EmpresaDto.class);
+        empresaRepository.save(empresa);
+
+        return modelMapper.map(empresa, EmpresaDto.class);
+
+    }
+
+    public EmpresaDto abrirLoja(Long id) {
+
+        notFoundService.seExisteEmpresa(id);
+
+        Empresa empresa = empresaRepository.getReferenceById(id);
+        empresa.setId(id);
+        empresa.setNome(empresa.getNome());
+        empresa.setCnpj(empresa.getCnpj());
+        empresa.setStatusLoja(StatusLoja.ABERTO);
+
+        empresaRepository.save(empresa);
+
+        return modelMapper.map(empresa, EmpresaDto.class);
 
     }
 }

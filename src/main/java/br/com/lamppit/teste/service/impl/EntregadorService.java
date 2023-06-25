@@ -3,7 +3,6 @@ package br.com.lamppit.teste.service.impl;
 import br.com.lamppit.teste.dto.EntregadorDto;
 import br.com.lamppit.teste.dto.EntregadorPedidoDto;
 import br.com.lamppit.teste.dto.PedidoIdDto;
-import br.com.lamppit.teste.exceptions.ProductNotFound;
 import br.com.lamppit.teste.model.Entregador;
 import br.com.lamppit.teste.model.Pedido;
 import br.com.lamppit.teste.repository.EntregadorRepository;
@@ -48,16 +47,14 @@ public class EntregadorService {
     }
 
 
-
-
     public EntregadorPedidoDto aceitarDelivery(PedidoIdDto dto, Long id) {
 
         Pedido pedido = modelMapper.map(dto, Pedido.class);
-
-
-        notFoundService.sePedidoExiste(id);
-        pedido = pedidoRepository.getReferenceById(pedido.getId());
+        
+        notFoundService.sePedidoExiste(pedido.getId());
         notFoundService.seEntregadorExiste(id);
+
+        pedido = pedidoRepository.getReferenceById(pedido.getId());
         Entregador entregador = entregadorRepository.getReferenceById(id);
 
         pedido.setId(pedido.getId());

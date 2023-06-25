@@ -58,29 +58,29 @@ public class PedidoController {
     }
 
 
-    @PatchMapping("/atendimento/{id}")
+    @PatchMapping("/atualizarStatus/{id}")
     public ResponseEntity<PedidoDto> atualizaPedidoParaEmAtendimento(@PathVariable Long id) {
 
         PedidoDto pedidoDto = produtoService.atualizarPedidoParaEmAtendimento(id);
 
         return ResponseEntity.ok(pedidoDto);
     }
-
-    @PatchMapping("/entregue/{id}")
-    public ResponseEntity<PedidoDto> atualizaPedidoParaEntregue(@PathVariable Long id) {
-
-        PedidoDto pedidoDto = produtoService.atualizarPedidoParaEntregue(id);
-
-        return ResponseEntity.ok(pedidoDto);
-    }
-
-    @PatchMapping("/concluido/{id}")
-    public ResponseEntity<PedidoDto> atualizarStatusPedidoConcluido( @PathVariable Long id) {
-
-        PedidoDto pedidoDto = produtoService.atualizarPedidoConcluido(id);
-
-        return ResponseEntity.ok(pedidoDto);
-    }
+//
+//    @PatchMapping("/entregue/{id}")
+//    public ResponseEntity<PedidoDto> atualizaPedidoParaEntregue(@PathVariable Long id ) {
+//
+//        PedidoDto pedidoDto = produtoService.atualizarPedidoParaEntregue(id);
+//
+//        return ResponseEntity.ok(pedidoDto);
+//    }
+//
+//    @PatchMapping("/concluido/{id}")
+//    public ResponseEntity<PedidoDto> atualizarStatusPedidoConcluido( @PathVariable Long id) {
+//
+//        PedidoDto pedidoDto = produtoService.atualizarPedidoConcluido(id);
+//
+//        return ResponseEntity.ok(pedidoDto);
+//    }
 
 
 }

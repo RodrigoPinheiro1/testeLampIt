@@ -16,7 +16,7 @@ public class ProductNotFoundException extends RuntimeException {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<MessageGlobalException> usuarioNotFound() {
+    public ResponseEntity<MessageGlobalException> productNotFound() {
 
         MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Produto nao existe");
 

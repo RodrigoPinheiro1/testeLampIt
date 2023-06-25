@@ -16,7 +16,7 @@ public class EmpresaNotFoundException extends RuntimeException {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EmpresaNotFoundException.class)
-    public ResponseEntity<MessageGlobalException> usuarioNotFound() {
+    public ResponseEntity<MessageGlobalException> empresaNotFound() {
 
         MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), " Empresa nao existe");
 

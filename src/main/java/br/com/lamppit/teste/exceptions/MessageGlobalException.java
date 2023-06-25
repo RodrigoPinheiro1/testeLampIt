@@ -22,6 +22,11 @@ public class MessageGlobalException {
     private List<ValidacaoDto> validacaoDtos = new ArrayList<>();
 
 
+    public MessageGlobalException(LocalDateTime data, Integer status) {
+        this.data = data;
+        this.status = status;
+    }
+
     public MessageGlobalException(LocalDateTime data, Integer status, String message) {
         this.data = data;
         this.status = status;
