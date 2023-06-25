@@ -2,6 +2,7 @@ package br.com.lamppit.teste.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class Perfil  {
+public class Perfil implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +20,8 @@ public class Perfil  {
     private String nome;
 
 
-
+    @Override
+    public String getAuthority() {
+        return nome;
+    }
 }
