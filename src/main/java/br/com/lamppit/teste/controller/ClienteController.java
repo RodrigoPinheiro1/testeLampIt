@@ -1,0 +1,37 @@
+package br.com.lamppit.teste.controller;
+
+import br.com.lamppit.teste.dto.ClienteDto;
+import br.com.lamppit.teste.dto.PedidoDto;
+import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
+import br.com.lamppit.teste.service.impl.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+
+@RestController
+@RequestMapping("/cliente")
+public class ClienteController {
+
+
+    @Autowired
+    private ClienteService clienteService;
+
+
+
+    @PostMapping
+    public ResponseEntity<ClienteDto> cadastrarCliente(@RequestBody @Valid ClienteDto dto,
+                                                      UriComponentsBuilder builder) {
+
+        ClienteDto clienteDto = clienteService.cadastrarCliente(dto);
+
+        URI uri = builder.path("/cliente/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(clienteDto);
+
+    }
+
+
+}
