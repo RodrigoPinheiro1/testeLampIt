@@ -40,5 +40,13 @@ public class EmpresaController {
         return empresaService.paginacao(pageable);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<EmpresaDto> fecharLoja (@PathVariable Long id){
+
+        EmpresaDto empresaDto = empresaService.fecharLoja(id);
+
+        return ResponseEntity.ok(empresaDto);
+
+    }
 
 }

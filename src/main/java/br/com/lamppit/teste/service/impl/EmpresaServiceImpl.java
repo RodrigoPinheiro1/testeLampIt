@@ -6,6 +6,7 @@ import br.com.lamppit.teste.dto.EmpresaProdutoDto;
 import br.com.lamppit.teste.dto.ListProdutoDto;
 import br.com.lamppit.teste.exceptions.ProductNotFound;
 import br.com.lamppit.teste.model.Empresa;
+import br.com.lamppit.teste.model.StatusLoja;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
@@ -36,6 +37,7 @@ public class EmpresaServiceImpl {
 
         Empresa empresa = modelMapper.map(dto, Empresa.class);
 
+        empresa.setStatusLoja(StatusLoja.ABERTO);
         empresa.getProdutos().forEach(produto -> produto.setEmpresa(empresa));
 
 
@@ -69,4 +71,15 @@ public class EmpresaServiceImpl {
     }
 
 
+    public EmpresaDto fecharLoja(Long id) {
+
+        notFoundService.seExisteEmpresa(id);
+
+        Empresa empresa = empresaRepository.getReferenceById(id);
+
+        empresa.setStatusLoja(StatusLoja.FECHADO);
+
+        return modelMapper.map(empresa,EmpresaDto.class);
+
+    }
 }

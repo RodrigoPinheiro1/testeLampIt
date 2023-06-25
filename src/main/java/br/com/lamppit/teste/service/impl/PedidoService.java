@@ -1,8 +1,13 @@
 package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.PedidoDto;
+import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
+import br.com.lamppit.teste.model.Cliente;
+import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Pedido;
 import br.com.lamppit.teste.model.Status;
+import br.com.lamppit.teste.repository.ClienteRepository;
+import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.PedidoRepository;
 import br.com.lamppit.teste.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
@@ -25,13 +30,27 @@ public class PedidoService {
     private ProdutoRepository produtoRepository;
 
     @Autowired
+    private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
     private PedidoRepository pedidoRepository;
 
 
-    public PedidoDto cadastrarPedido(PedidoDto dto) {
+    public PedidoDto cadastrarPedido(PedidoEmpresaIdDto dto, Long idCliente) {
 
         Pedido pedido = modelMapper.map(dto, Pedido.class);
 
+
+        Cliente cliente = clienteRepository.getReferenceById(idCliente);
+        Empresa empresa = empresaRepository.getReferenceById(dto.getEmpresaId());
+
+
+
+        pedido.setCliente(cliente);
+        pedido.setEmpresa(empresa);
         pedido.setStatus(Status.ANDAMENTO);
         pedido.setDataPedido(LocalDateTime.now());
 

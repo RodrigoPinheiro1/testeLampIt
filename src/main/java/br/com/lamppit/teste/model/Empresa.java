@@ -3,9 +3,13 @@ package br.com.lamppit.teste.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Data
@@ -21,6 +25,8 @@ public class Empresa extends  Usuario {
 
     private String cnpj;
 
+    @Enumerated(EnumType.STRING)
+    private StatusLoja statusLoja;
     @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
 

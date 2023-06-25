@@ -1,6 +1,7 @@
 package br.com.lamppit.teste.controller;
 
 import br.com.lamppit.teste.dto.PedidoDto;
+import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
 import br.com.lamppit.teste.service.impl.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,11 +21,11 @@ public class PedidoController {
     private PedidoService produtoService;
 
 
-    @PostMapping
-    public ResponseEntity<PedidoDto> cadastrarPedido(@RequestBody @Valid PedidoDto dto,
+    @PostMapping("/{id}")
+    public ResponseEntity<PedidoDto> cadastrarPedido(@RequestBody @Valid PedidoEmpresaIdDto dto, @PathVariable Long id,
                                                      UriComponentsBuilder builder) {
 
-        PedidoDto pedidoDto = produtoService.cadastrarPedido(dto);
+        PedidoDto pedidoDto = produtoService.cadastrarPedido(dto,id);
 
         URI uri = builder.path("/pedido/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(pedidoDto);

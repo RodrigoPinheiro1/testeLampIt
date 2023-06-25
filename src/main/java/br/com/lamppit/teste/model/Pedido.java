@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +27,18 @@ public class Pedido {
     private Status status;
 
    // @Enumerated(EnumType.STRING)
-    private String formaPagamento;
+    @NotNull
+    private FormaPagamento formaPagamento;
 
    // @Enumerated(EnumType.STRING)
-    private String formaEntrega;
+    @NotNull
+    private FormaEntrega formaEntrega;
 
     @ManyToOne
     private Entregador entregador;
+
+    @ManyToOne
+    private Cliente cliente;
 
 
     @ManyToOne
