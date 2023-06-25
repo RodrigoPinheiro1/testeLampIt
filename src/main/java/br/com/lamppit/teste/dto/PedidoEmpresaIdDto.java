@@ -1,14 +1,11 @@
 package br.com.lamppit.teste.dto;
 
-import br.com.lamppit.teste.model.Entregador;
 import br.com.lamppit.teste.model.FormaEntrega;
 import br.com.lamppit.teste.model.FormaPagamento;
 import br.com.lamppit.teste.model.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -17,13 +14,12 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class PedidoDto {
+public class PedidoEmpresaIdDto {
 
 
     private Long id;
 
     private LocalDateTime dataPedido;
-
 
     private Status status;
     @NotNull
@@ -31,11 +27,8 @@ public class PedidoDto {
     @NotNull
     private FormaEntrega formaEntrega;
 
-    private EntregadorDto entregador;
-
-    private EmpresaDto empresa;
-
-    private ClienteDto cliente;
+    @NotNull
+    private Long empresaId;
 
 
     @NotNull

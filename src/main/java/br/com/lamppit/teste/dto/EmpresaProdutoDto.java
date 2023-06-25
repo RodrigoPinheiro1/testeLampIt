@@ -1,5 +1,6 @@
 package br.com.lamppit.teste.dto;
 
+import br.com.lamppit.teste.model.StatusLoja;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,9 @@ public class EmpresaProdutoDto {
     private String nome;
     @NotNull
     private String cnpj;
+
+
+    private StatusLoja statusLoja;
 
     @Valid
     @NotNull
