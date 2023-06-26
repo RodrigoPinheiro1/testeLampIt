@@ -35,7 +35,7 @@ public class EmpresaController {
 
     }
 
-    @GetMapping("/pedido/andamento")
+        @GetMapping("/pedido/andamento")
     public Page<PedidoDto> pedidosStatusEmAndamento(Pageable pageable) {
         return produtoService.pedidosStatusEmAndamento(pageable);
     }
