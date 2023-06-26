@@ -3,6 +3,7 @@ package br.com.lamppit.teste.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -16,6 +17,11 @@ public class EntregadorDto {
 
     @NotNull
     private String email;
+
+    @Valid
+    @NotNull
+    private EnderecoDto endereco;
+
 
     private Long perfilId;
 

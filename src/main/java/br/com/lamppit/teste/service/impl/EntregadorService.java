@@ -1,8 +1,10 @@
 package br.com.lamppit.teste.service.impl;
 
+import br.com.lamppit.teste.dto.EnderecoDto;
 import br.com.lamppit.teste.dto.EntregadorDto;
 import br.com.lamppit.teste.dto.EntregadorPedidoDto;
 import br.com.lamppit.teste.dto.PedidoIdDto;
+import br.com.lamppit.teste.model.Endereco;
 import br.com.lamppit.teste.model.Entregador;
 import br.com.lamppit.teste.model.Pedido;
 import br.com.lamppit.teste.repository.EntregadorRepository;
@@ -28,7 +30,8 @@ public class EntregadorService {
     private PedidoService pedidoService;
     @Autowired
     private PedidoRepository pedidoRepository;
-
+    @Autowired
+    private CepService cepService;
 
 
     @Autowired
@@ -37,6 +40,13 @@ public class EntregadorService {
     public EntregadorDto cadastrarEntregador(EntregadorDto dto) {
 
         Entregador entregador = modelMapper.map(dto, Entregador.class);
+
+        EnderecoDto enderecoDto = cepService.viaCep(dto.getEndereco());
+
+        Endereco endereco = modelMapper.map(enderecoDto, Endereco.class);
+
+        endereco.setComplemento(dto.getEndereco().getComplemento());
+        endereco.setNumero(dto.getEndereco().getNumero());
 
         entregador.setNome(dto.getNome());
 
@@ -51,7 +61,7 @@ public class EntregadorService {
     public EntregadorPedidoDto aceitarDelivery(PedidoIdDto dto, Long id) {
 
         Pedido pedido = modelMapper.map(dto, Pedido.class);
-        
+
         notFoundService.sePedidoExiste(pedido.getId());
         notFoundService.seEntregadorExiste(id);
 

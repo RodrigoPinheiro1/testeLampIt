@@ -28,6 +28,9 @@ public class EmpresaProdutoDto {
     private String email;
 
 
+    @Valid
+    @NotNull
+    private EnderecoDto endereco;
     private StatusLoja statusLoja;
 
     @Valid
