@@ -1,6 +1,6 @@
 
 
-## Sistema de Entrega de pedidos  
+## Sistema de Delivery e pedidos
 sistema de autenticação com 3 niveis de permissao : 
 #### Cliente, Empresa e Entregador  
 
