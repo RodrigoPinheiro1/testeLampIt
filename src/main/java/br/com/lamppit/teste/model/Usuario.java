@@ -1,18 +1,11 @@
 package br.com.lamppit.teste.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 
 //@Table(name = "user_system", schema = "public", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
@@ -21,60 +14,38 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario  implements UserDetails {
+public class Usuario {
+
+
 
     private static final long serialVersionUID = 4358313336091674789L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @Size(min = 3, message = "{field.size}")
+//    @NotNull(message = "{field.notnull}")
+//    @NotEmpty(message = "{field.notempty}")
+//    @Pattern(regexp = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\\s]+$", message = "{field.pattern.notNumber}")
+    private String nome;
+
+//    @Email(message = "{field.email}")
+//    @NotNull(message = "{field.notnull}")
+
     private String email;
-    private String senha ;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Perfil> perfil = new ArrayList<>();
+//    @NotNull(message = "{field.notnull}")
+//    @NotEmpty(message = "{field.notempty}")
+    private String username;
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return perfil;
-    }
-
-    @Override
-    public String getPassword() {
-        return senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    //@NotNull(message = "{field.notnull}")
+    private String password;
 
 
+    @Embedded
+    private Endereco endereco;
 
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    private List<Perfil> perfils = new ArrayList<>();
-//
 
 }

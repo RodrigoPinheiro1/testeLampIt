@@ -18,7 +18,6 @@ public class Cliente extends Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
 

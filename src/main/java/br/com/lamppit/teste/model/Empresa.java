@@ -3,6 +3,7 @@ package br.com.lamppit.teste.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -23,7 +24,11 @@ public class Empresa extends  Usuario {
     private Long id;
 
 
+
+
     private String cnpj;
+
+
 
     @Enumerated(EnumType.STRING)
     private StatusLoja statusLoja;

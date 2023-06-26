@@ -4,8 +4,10 @@ import br.com.lamppit.teste.model.StatusLoja;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +17,20 @@ import java.util.List;
 public class EmpresaProdutoDto {
 
     private Long id;
+
     @NotNull
+    @NotEmpty
     private String nome;
-    @NotNull
+    @CNPJ
     private String cnpj;
+
+    @NotNull
+    private String email;
 
 
     private StatusLoja statusLoja;
 
     @Valid
-    @NotNull
     private List<ProdutoDto> produtos = new ArrayList<>();
 
 }

@@ -29,13 +29,14 @@ public class EntregadorService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+
+
     @Autowired
     private ModelMapper modelMapper;
 
     public EntregadorDto cadastrarEntregador(EntregadorDto dto) {
 
         Entregador entregador = modelMapper.map(dto, Entregador.class);
-
 
         entregador.setNome(dto.getNome());
 

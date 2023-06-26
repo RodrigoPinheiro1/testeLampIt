@@ -14,5 +14,10 @@ public class EntregadorDto {
     @NotNull
     private String nome;
 
+    @NotNull
+    private String email;
+
+    private Long perfilId;
+
 
 }
