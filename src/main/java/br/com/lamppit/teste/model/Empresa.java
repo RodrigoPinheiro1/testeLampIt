@@ -25,7 +25,7 @@ public class Empresa extends  Usuario {
 
 
 
-
+    private String nome;
     private String cnpj;
 
 

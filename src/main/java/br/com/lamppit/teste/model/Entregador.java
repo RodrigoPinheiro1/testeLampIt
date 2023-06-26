@@ -19,6 +19,7 @@ public class Entregador extends Usuario {
     private Long id;
 
 
+    private String nome;
     @OneToMany(mappedBy = "entregador",cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
 

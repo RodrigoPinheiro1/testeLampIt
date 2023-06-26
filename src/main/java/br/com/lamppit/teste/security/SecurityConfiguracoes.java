@@ -36,18 +36,21 @@ public class SecurityConfiguracoes {
     @Bean
     protected SecurityFilterChain filterChain  (HttpSecurity httpSecurity) throws Exception {
         
-        String gerente = "GERENTE";
-        String operador = "OPERADOR";
+        String entregador = "ENTREGADOR";
+        String cliente = "CLIENTE";
+        String empresa = "EMPRESA";
 
         httpSecurity.authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST,"/login").permitAll()
-                .antMatchers(HttpMethod.GET,"/login").permitAll()
-                .antMatchers(HttpMethod.POST,"/gerente").permitAll()
-                .antMatchers(HttpMethod.POST,"/operador").permitAll()
-               .antMatchers(HttpMethod.POST,"/produto").hasAuthority(gerente)
-                .antMatchers(HttpMethod.PUT,"/produto").hasAuthority(gerente)
-                .antMatchers(HttpMethod.POST,"/estoque").hasAnyAuthority(gerente,operador)
-                .antMatchers(HttpMethod.PUT,"/estoque").hasAnyAuthority(gerente,operador)
+                .antMatchers(HttpMethod.POST,"/auth").permitAll()
+                .antMatchers(HttpMethod.GET,"/auth").permitAll()
+                .antMatchers(HttpMethod.POST,"/cliente").permitAll()
+                .antMatchers(HttpMethod.GET,"/v2/api-docs").permitAll()
+                .antMatchers(HttpMethod.GET,"/configuration/ui").permitAll()
+                .antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/configuration/security").permitAll()
+                .antMatchers(HttpMethod.GET,("/swagger-ui.html")).permitAll()
+                .antMatchers(HttpMethod.POST,"/empresa").hasAuthority(empresa)
+                .antMatchers(HttpMethod.GET,("/webjars/**")).permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
