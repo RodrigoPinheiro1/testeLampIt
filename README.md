@@ -1,4 +1,35 @@
 
+
+## Sistema de Entrega de pedidos  
+sistema de autenticação com 3 niveis de permissao : 
+#### Cliente, Empresa e Entregador  
+
+para usar o sistema necessario necessario dos logins passando  o json : 
+
+#### endpoint = http://localhost:8080/auth  
+
+login cliente :  
+{  
+"email":"emailCliente",  
+"senha":"123456"  
+}  
+login empresa :   
+{   
+"email":"emailEmpresa",  
+"senha":"123456"  
+}  
+login entregador :   
+{    
+"email":"emailEntregador",  
+"senha":"123456"  
+}  
+
+
+
+
+
+
+
 # Teste Trainee
 
 Avaliação Prática - Desenvolvedor Backend
