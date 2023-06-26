@@ -1,12 +1,22 @@
 
 
-## Sistema de Delivery e pedidos
+## Sistema de Delivery
+
+cadastro de produtos, clientes, empresas, e entregadores, e visualização de pedidos
+
 sistema de autenticação com 3 niveis de permissao : 
 #### Cliente, Empresa e Entregador  
 
+## Documentacao Completa: http://localhost:8080/swagger-ui/
+
+### obs: endpoints todos tem : http://localhost:8080
+
 para usar o sistema necessario necessario dos logins passando  o json : 
 
-#### endpoint = http://localhost:8080/auth  
+Auth controller
+## Authentication User Controller
+
+### endpoint =  POST /auth  
 
 login cliente :  
 {  
@@ -24,11 +34,88 @@ login entregador :
 "senha":"123456"  
 }  
 
+### GET  ​/auth   Visualizar Perfils
 
 
+## Cliente Controller
+
+### POST​ /cliente  cadastrar Cliente
+
+{
+  "endereco": {
+    "cep": "string",  
+    "complemento": "string",  
+    "numero": "string"  
+  },  
+  "id": 0,  
+  "nome": "string"  
+}  
 
 
+### GET  /cliente/pedido/naoEntregue  paginação pedidos nao entregues
 
+
+## Empresa Controller
+
+### POST  ​/empresa  cadastrarEmpresa
+
+body
+Model
+{
+  "cnpj": "string",  
+  "email": "string",  
+  "endereco": {  
+    "bairro": "string",  
+    "cep": "string",  
+    "complemento": "string",  
+    "localidade": "string",  
+    "logradouro": "string",  
+    "numero": "string"  
+  },  
+  "id": 0,  
+  "nome": "string",  
+  "produtos": [  
+    {  
+      "descricao": "string",  
+      "id": 0,  
+      "nome": "string",   
+      "quantidade": 0  
+    }
+  ],
+  "statusLoja": "ABERTO"
+}
+
+
+### GET :  ​/empresa 
+EmpresasDisponiveis mostra empresas que estao abertas
+
+retorno 
+{
+  "content": [   
+    {  
+      "cnpj": "string",  
+      "email": "string",  
+      "endereco": {  
+        "bairro": "string",  
+        "cep": "string",  
+        "complemento": "string",  
+        "localidade": "string",  
+        "logradouro": "string",  
+        "numero": "string"  
+      },  
+      "id": 0,  
+      "nome": "string",  
+      "produtos": [  
+        {  
+          "descricao": "string",  
+          "id": 0,  
+          "nome": "string",  
+          "quantidade": 0  
+        }  
+      ],  
+      "statusLoja": "ABERTO"   
+    }  
+  ],  
 
 # Teste Trainee
 
