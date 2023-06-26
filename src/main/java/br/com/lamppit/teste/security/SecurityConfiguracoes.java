@@ -48,6 +48,7 @@ public class SecurityConfiguracoes {
                 .antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/configuration/security").permitAll()
                 .antMatchers(HttpMethod.GET,("/swagger-ui.html")).permitAll()
+                .antMatchers(HttpMethod.GET,("/swagger/**")).permitAll()
                 .antMatchers(HttpMethod.GET,("/webjars/**")).permitAll()
                 .antMatchers(HttpMethod.POST,"/cliente").hasAuthority(cliente)
                 .antMatchers(HttpMethod.POST,"/entregador").hasAuthority(entregador)
