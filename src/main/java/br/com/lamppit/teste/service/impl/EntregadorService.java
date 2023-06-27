@@ -48,6 +48,7 @@ public class EntregadorService {
         endereco.setComplemento(dto.getEndereco().getComplemento());
         endereco.setNumero(dto.getEndereco().getNumero());
 
+        entregador.setEndereco(endereco);
         entregador.setNome(dto.getNome());
 
         entregadorRepository.save(entregador);

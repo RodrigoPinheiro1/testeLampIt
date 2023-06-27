@@ -42,7 +42,7 @@ public class EmpresaServiceImpl {
 
         endereco.setComplemento(dto.getEndereco().getComplemento());
         endereco.setNumero(dto.getEndereco().getNumero());
-
+        empresa.setEndereco(endereco);
 
         empresa.setStatusLoja(StatusLoja.ABERTO);
         empresa.getProdutos().forEach(produto -> produto.setEmpresa(empresa));
