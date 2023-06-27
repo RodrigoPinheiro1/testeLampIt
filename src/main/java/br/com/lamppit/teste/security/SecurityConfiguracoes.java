@@ -39,6 +39,7 @@ public class SecurityConfiguracoes {
         String entregador = "ENTREGADOR";
         String cliente = "CLIENTE";
         String empresa = "EMPRESA";
+        String admin = "ADMIN";
 
         httpSecurity.authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST,"/auth").permitAll()
@@ -50,17 +51,17 @@ public class SecurityConfiguracoes {
                 .antMatchers(HttpMethod.GET,("/swagger-ui/**")).permitAll()
                 .antMatchers(HttpMethod.GET,("/swagger/**")).permitAll()
                 .antMatchers(HttpMethod.GET,("/webjars/**")).permitAll()
-                .antMatchers(HttpMethod.POST,"/cliente").hasAuthority(cliente)
-                .antMatchers(HttpMethod.POST,"/entregador").hasAuthority(entregador)
-                .antMatchers(HttpMethod.POST,"/empresa/**").hasAuthority(empresa)
-                .antMatchers(HttpMethod.GET,"/entregador/pedido/entregar").hasAuthority(entregador)
-                .antMatchers(HttpMethod.PUT,"/entregador/pedido/aceitarDelivery/**").hasAuthority(entregador)
-                .antMatchers(HttpMethod.POST,"/pedido/*").hasAuthority(cliente)
-                .antMatchers(HttpMethod.GET,"/pedido/**").hasAnyAuthority(cliente,empresa)
-                .antMatchers(HttpMethod.GET,"/cliente/menu/**").hasAuthority(cliente)
-                .antMatchers(HttpMethod.PATCH,"/empresa/atualizarStatus/**").hasAuthority(empresa)
-                .antMatchers(HttpMethod.PATCH,"/empresa/fechar/**").hasAuthority(empresa)
-                .antMatchers(HttpMethod.PATCH,"/empresa/abrir/**").hasAuthority(empresa)
+                .antMatchers(HttpMethod.POST,"/cliente").hasAnyAuthority(cliente,admin)
+                .antMatchers(HttpMethod.POST,"/entregador").hasAnyAuthority(entregador,admin)
+                .antMatchers(HttpMethod.POST,"/empresa/**").hasAnyAuthority(empresa,admin)
+                .antMatchers(HttpMethod.GET,"/entregador/pedido/entregar").hasAnyAuthority(entregador,admin)
+                .antMatchers(HttpMethod.PUT,"/entregador/pedido/aceitarDelivery/**").hasAnyAuthority(entregador,admin)
+                .antMatchers(HttpMethod.POST,"/pedido/*").hasAnyAuthority(cliente,admin)
+                .antMatchers(HttpMethod.GET,"/pedido/**").hasAnyAuthority(cliente,empresa,admin)
+                .antMatchers(HttpMethod.GET,"/cliente/menu/**").hasAnyAuthority(cliente,admin)
+                .antMatchers(HttpMethod.PATCH,"/empresa/atualizarStatus/**").hasAnyAuthority(empresa,admin)
+                .antMatchers(HttpMethod.PATCH,"/empresa/fechar/**").hasAnyAuthority(empresa,admin)
+                .antMatchers(HttpMethod.PATCH,"/empresa/abrir/**").hasAnyAuthority(empresa,admin)
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -103,7 +103,11 @@ SELECT 3, 'ENTREGADOR'
 WHERE NOT EXISTS(
         SELECT 1 FROM perfil where id = 3
     );
-
+INSERT INTO perfil(id, nome)
+SELECT 4, 'ADMIN'
+WHERE NOT EXISTS(
+        SELECT 1 FROM perfil where id = 4
+    );
 
 insert into usuario(email, bairro, cep, complemento, localidade, logradouro, numero, senha)
 SELECT
@@ -149,6 +153,21 @@ WHERE NOT EXISTS(
         SELECT 1 FROM usuario where id = 3
     );
 
+insert into usuario(email, bairro, cep, complemento, localidade, logradouro, numero, senha)
+SELECT
+    'admin',
+    'ads',
+    'asdsad',
+    'sadsdasad',
+    'dsaasd',
+    'sadasd',
+    '213213',
+    '$2a$10$./f1RQvh4Uo3rSsiOetDMeCKHsorsHzez7Z7najauKoBUABAPLRVy'
+WHERE NOT EXISTS(
+        SELECT 1 FROM usuario where id = 4
+    );
+
+
 insert INTO usuario_perfil(usuario_id, perfil_id)
 SELECT 1, 1;
 
@@ -156,3 +175,6 @@ insert INTO usuario_perfil(usuario_id, perfil_id)
 SELECT 2, 2;
 insert INTO usuario_perfil(usuario_id, perfil_id)
 SELECT 3, 3;
+
+insert INTO usuario_perfil(usuario_id, perfil_id)
+SELECT 4, 4;
