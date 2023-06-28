@@ -4,6 +4,7 @@ import br.com.lamppit.teste.dto.ProdutoDto;
 import br.com.lamppit.teste.dto.ProdutoEmpresaDto;
 import br.com.lamppit.teste.service.impl.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -13,6 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/empresa/produto")
+@Profile({"dev","prod"})
 public class ProdutoController {
 
     @Autowired
