@@ -1,5 +1,6 @@
-package br.com.lamppit.teste.exceptions;
+package br.com.lamppit.teste.exceptions.NotFound;
 
+import br.com.lamppit.teste.exceptions.MessageGlobalException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
