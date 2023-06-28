@@ -4,6 +4,7 @@ import br.com.lamppit.teste.dto.EmpresaDto;
 import br.com.lamppit.teste.dto.ListProdutoDto;
 import br.com.lamppit.teste.service.impl.EmpresaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cliente/menu")
+@Profile({"dev","prod"})
 public class MenuController {
 
 
