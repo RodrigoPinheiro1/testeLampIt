@@ -4,8 +4,9 @@
 
 cadastro de produtos, clientes, empresas, e entregadores, e visualização de pedidos
 
-sistema de autenticação com 3 niveis de permissao : 
-#### Cliente, Empresa e Entregador  
+sistema de autenticação com 4 niveis de permissao : 
+#### Admin ,Cliente, Empresa e Entregador  
+obs: admin pode realizar todas as requisições
 
 ## Documentacao Completa: http://localhost:8080/swagger-ui/
 
@@ -18,6 +19,11 @@ Auth controller
 
 ### endpoint =  POST /auth  
 
+login admin :  
+{  
+"email":"admin",  
+"senha":"123456"  
+}  
 login cliente :  
 {  
 "email":"emailCliente",  
