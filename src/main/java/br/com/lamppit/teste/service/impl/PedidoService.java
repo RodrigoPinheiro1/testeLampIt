@@ -4,10 +4,12 @@ import br.com.lamppit.teste.dto.PedidoDto;
 import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
 import br.com.lamppit.teste.exceptions.AguardarConfirmarEntregaException;
 import br.com.lamppit.teste.exceptions.EmpresaFechadaException;
+import br.com.lamppit.teste.exceptions.Status.StatusPedidoException;
 import br.com.lamppit.teste.model.Cliente;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Pedido;
 import br.com.lamppit.teste.model.Status;
+import br.com.lamppit.teste.model.situacao.*;
 import br.com.lamppit.teste.repository.ClienteRepository;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.PedidoRepository;
@@ -37,6 +39,7 @@ public class PedidoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
@@ -53,10 +56,13 @@ public class PedidoService {
 
         empresaRepository.seEmpresaEstaAberto(dto.getEmpresaId()).orElseThrow(EmpresaFechadaException::new);
 
+        pedido.setSituacaoPedido(new EmAnalise());
+
+        pedido.getSituacaoPedido().cadastrado(pedido);
+        System.out.println(pedido.getSituacaoPedido());
 
         pedido.setCliente(cliente);
         pedido.setEmpresa(empresa);
-        pedido.setStatus(Status.CADASTRADO);
         pedido.setDataPedido(LocalDateTime.now());
 
         pedido.getProdutos().forEach(produto ->
@@ -86,34 +92,45 @@ public class PedidoService {
     }
 
 
+    public PedidoDto atualizaPedidoParaConcluido(Long id) {
+        Pedido pedido = verificaPedido(id);
+
+        if (pedido.getSituacaoPedido() instanceof Cadastrado) {
+            pedido.setSituacaoPedido(new EmAtendimento());
+            pedido.getSituacaoPedido().concluido(pedido);
+
+            return getPedidoDto(pedido);
+        }
+        throw new StatusPedidoException();
+    }
+
     public PedidoDto atualizarPedidoParaEmAtendimento(Long id) {
 
+        Pedido pedido = verificaPedido(id);
 
-        notFoundService.sePedidoExiste(id);
-        Pedido pedido = pedidoRepository.getReferenceById(id);
 
-        if (pedido.getStatus() == Status.CADASTRADO) {
+        if (pedido.getSituacaoPedido() instanceof EmAnalise) {
+            pedido.setSituacaoPedido(new Cadastrado());
+            pedido.getSituacaoPedido().emAtendimento(pedido);
 
-            pedido.setId(id);
-            pedido.setStatus(Status.EM_ATENDIMENTO);
             return getPedidoDto(pedido);
-        } else if (pedido.getStatus() == Status.EM_ATENDIMENTO) {
-            pedido.setId(id);
-            pedido.setStatus(Status.CONCLUIDO);
-            return getPedidoDto(pedido);
-        } else if (pedido.getStatus() ==Status.CONCLUIDO) {
-           throw new AguardarConfirmarEntregaException();
-        } else if(pedido.getStatus() == Status.ENTREGA_CONFIRMADA) {
-            throw new AguardarConfirmarEntregaException();
         }
-        throw new AguardarConfirmarEntregaException();
+
+        throw new StatusPedidoException();
+
     }
 
 
+    public Pedido verificaPedido(Long id) {
+        notFoundService.sePedidoExiste(id);
+        return pedidoRepository.getReferenceById(id);
+    }
 
-    private PedidoDto getPedidoDto(Pedido pedido) {
+
+    public PedidoDto getPedidoDto(Pedido pedido) {
         pedido.setDataPedido(pedido.getDataPedido());
         pedido.setEntregador(pedido.getEntregador());
+        pedido.setCliente(pedido.getCliente());
         pedido.setEmpresa(pedido.getEmpresa());
         pedido.setFormaEntrega(pedido.getFormaEntrega());
         pedido.setFormaPagamento(pedido.getFormaPagamento());
