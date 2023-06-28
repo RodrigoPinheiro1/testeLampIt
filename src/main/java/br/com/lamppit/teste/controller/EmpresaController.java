@@ -4,6 +4,7 @@ import br.com.lamppit.teste.dto.*;
 import br.com.lamppit.teste.service.impl.EmpresaServiceImpl;
 import br.com.lamppit.teste.service.impl.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/empresa")
+@Profile({"dev","prod"})
 public class EmpresaController {
 
 

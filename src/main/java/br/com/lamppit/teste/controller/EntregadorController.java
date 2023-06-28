@@ -1,11 +1,14 @@
 package br.com.lamppit.teste.controller;
 
 
-import br.com.lamppit.teste.dto.*;
+import br.com.lamppit.teste.dto.EntregadorDto;
+import br.com.lamppit.teste.dto.EntregadorPedidoDto;
+import br.com.lamppit.teste.dto.PedidoDto;
+import br.com.lamppit.teste.dto.PedidoIdDto;
 import br.com.lamppit.teste.service.impl.EntregadorService;
 import br.com.lamppit.teste.service.impl.PedidoService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/entregador")
+@Profile({"dev","prod"})
 public class EntregadorController {
 
 
@@ -46,6 +50,15 @@ public class EntregadorController {
         EntregadorPedidoDto entregadorPedidoDto = entregadorService.aceitarDelivery(dto, id);
 
         return ResponseEntity.ok(entregadorPedidoDto);
+
+    }
+
+    @PatchMapping("/pedido/entregue/{id}")
+    public ResponseEntity<PedidoDto> deliveryEntregue (@PathVariable Long id) {
+
+        PedidoDto pedidoDto = entregadorService.deliveryEntregue(id);
+
+        return ResponseEntity.ok(pedidoDto);
 
     }
 

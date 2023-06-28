@@ -1,6 +1,6 @@
 package br.com.lamppit.teste.service.impl;
 
-import br.com.lamppit.teste.exceptions.*;
+import br.com.lamppit.teste.exceptions.NotFound.*;
 import br.com.lamppit.teste.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
