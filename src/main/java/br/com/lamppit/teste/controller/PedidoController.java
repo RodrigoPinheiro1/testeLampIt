@@ -16,7 +16,6 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/pedido")
-@Profile({"dev","prod"})
 public class PedidoController {
 
     @Autowired

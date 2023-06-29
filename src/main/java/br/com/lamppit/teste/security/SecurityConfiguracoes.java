@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 @Configuration
-@Profile({"prod","teste"})
 public class SecurityConfiguracoes {
 
     @Autowired

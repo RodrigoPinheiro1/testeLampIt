@@ -20,7 +20,6 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/entregador")
-@Profile({"dev","prod"})
 public class EntregadorController {
 
 

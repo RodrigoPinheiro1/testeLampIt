@@ -14,7 +14,6 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/empresa/produto")
-@Profile({"dev","prod"})
 public class ProdutoController {
 
     @Autowired
@@ -28,7 +27,7 @@ public class ProdutoController {
         ProdutoEmpresaDto produtoDto = produtoService.cadastrarProduto(dto, id);
 
 
-        URI uri = builder.path("/empresa/{id}").buildAndExpand(dto.getId()).toUri();
+        URI uri = builder.path("/empresa/produto/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(produtoDto);
 
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cliente/menu")
-@Profile({"dev","prod"})
 public class MenuController {
 
 
