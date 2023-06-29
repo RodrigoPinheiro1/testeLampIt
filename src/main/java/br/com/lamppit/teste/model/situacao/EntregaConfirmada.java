@@ -11,8 +11,13 @@ public class EntregaConfirmada extends SituacaoPedido {
 
 
     public void entregue(Pedido pedido) {
-
+        if (pedido.getStatus() == Status.ENTREGA_CONFIRMADA) {
             pedido.setSituacaoPedido(new Entregue());
             pedido.setStatus(Status.ENTREGUE);
+
+        }
+            else {
+            throw new StatusPedidoException();
+        }
     }
 }
