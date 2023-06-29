@@ -73,34 +73,28 @@ public class EntregadorService {
 
         pedido.setId(pedido.getId());
 
-        if (pedido.getSituacaoPedido() instanceof EmAtendimento) {
+        pedido.setSituacaoPedido(new Concluido());
+        pedido.entregaConfirmada();
 
-            pedido.setSituacaoPedido(new Concluido());
-            pedido.entregaConfirmada();
+        pedido.setEntregador(entregador);
 
-            pedido.setEntregador(entregador);
+        entregador.setId(id);
+        entregador.setNome(entregador.getNome());
+        entregador.setPedidos(Collections.singletonList(pedido));
 
-            entregador.setId(id);
-            entregador.setNome(entregador.getNome());
-            entregador.setPedidos(Collections.singletonList(pedido));
-
-            pedidoRepository.save(pedido);
-            return modelMapper.map(pedido, EntregadorPedidoDto.class);
-
-        }
-        throw new StatusPedidoException();
+        pedidoRepository.save(pedido);
+        return modelMapper.map(pedido, EntregadorPedidoDto.class);
     }
+
 
     public PedidoDto deliveryEntregue(Long id) {
 
         Pedido pedido = pedidoService.verificaPedido(id);
 
-        if (pedido.getSituacaoPedido() instanceof Concluido) {
-            pedido.setSituacaoPedido(new EntregaConfirmada());
-            pedido.getSituacaoPedido().entregue(pedido);
+        pedido.setSituacaoPedido(new EntregaConfirmada());
+        pedido.entregue();
 
-            return pedidoService.getPedidoDto(pedido);
-        }
-        throw new StatusPedidoException();
+        return pedidoService.getPedidoDto(pedido);
+
     }
 }

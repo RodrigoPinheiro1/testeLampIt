@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Objects;
 
 @Service
 public class PedidoService {
@@ -57,9 +58,7 @@ public class PedidoService {
         empresaRepository.seEmpresaEstaAberto(dto.getEmpresaId()).orElseThrow(EmpresaFechadaException::new);
 
         pedido.setSituacaoPedido(new EmAnalise());
-
-        pedido.getSituacaoPedido().cadastrado(pedido);
-        System.out.println(pedido.getSituacaoPedido());
+        pedido.cadastro();
 
         pedido.setCliente(cliente);
         pedido.setEmpresa(empresa);
@@ -93,31 +92,23 @@ public class PedidoService {
 
 
     public PedidoDto atualizaPedidoParaConcluido(Long id) {
+
+
         Pedido pedido = verificaPedido(id);
+        pedido.setSituacaoPedido(new EmAtendimento());
+        pedido.concluido();
 
-        if (pedido.getSituacaoPedido() instanceof Cadastrado) {
-            pedido.setSituacaoPedido(new EmAtendimento());
-            pedido.getSituacaoPedido().concluido(pedido);
-
-            return getPedidoDto(pedido);
-        }
-        throw new StatusPedidoException();
+        return getPedidoDto(pedido);
     }
 
     public PedidoDto atualizarPedidoParaEmAtendimento(Long id) {
 
         Pedido pedido = verificaPedido(id);
 
+        pedido.setSituacaoPedido(new Cadastrado());
+        pedido.emAtendimento();
 
-        if (pedido.getSituacaoPedido() instanceof EmAnalise) {
-            pedido.setSituacaoPedido(new Cadastrado());
-            pedido.getSituacaoPedido().emAtendimento(pedido);
-
-            return getPedidoDto(pedido);
-        }
-
-        throw new StatusPedidoException();
-
+        return getPedidoDto(pedido);
     }
 
 
