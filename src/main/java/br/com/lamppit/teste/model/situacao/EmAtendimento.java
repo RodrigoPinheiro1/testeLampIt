@@ -12,8 +12,12 @@ public class EmAtendimento extends SituacaoPedido {
 
     @Override
     public void concluido(Pedido pedido) {
+        if (pedido.getStatus() == Status.EM_ATENDIMENTO) {
             pedido.setSituacaoPedido(new Concluido());
             pedido.setStatus(Status.CONCLUIDO);
+        }else {
+            throw new StatusPedidoException();
+        }
     }
 
 }

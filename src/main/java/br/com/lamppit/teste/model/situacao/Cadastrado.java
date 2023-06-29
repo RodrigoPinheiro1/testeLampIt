@@ -13,11 +13,14 @@ public class Cadastrado extends SituacaoPedido{
 
     @Override
     public void emAtendimento(Pedido pedido) {
+        if (pedido.getStatus() == Status.CADASTRADO) {
 
-
-                pedido.setSituacaoPedido(new EmAtendimento());
-                pedido.setStatus(Status.EM_ATENDIMENTO);
-
+            pedido.setSituacaoPedido(new EmAtendimento());
+            pedido.setStatus(Status.EM_ATENDIMENTO);
+        }
+        else {
+            throw new StatusPedidoException();
+        }
     }
 
 }

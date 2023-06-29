@@ -12,8 +12,12 @@ public class Concluido extends SituacaoPedido {
 
     @Override
     public void entregaConfirmada(Pedido pedido) {
+        if (pedido.getStatus() == Status.CONCLUIDO) {
             pedido.setSituacaoPedido(new EntregaConfirmada());
             pedido.setStatus(Status.ENTREGA_CONFIRMADA);
+        } else {
+            throw new StatusPedidoException();
+        }
     }
 
 }
