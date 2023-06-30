@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@Profile("prod")
 public class AutenticacaoViaToken extends OncePerRequestFilter {
 
     private UsuarioRepository usuarioRepository;
@@ -31,7 +30,7 @@ public class AutenticacaoViaToken extends OncePerRequestFilter {
         if (token == null || !token.startsWith("Bearer ")) {
             return null;
         }
-        return token.substring(7, token.length()); //pega apartir do espaço
+        return token.substring(7); //pega apartir do espaço
     }
 
     private void autenticar (String token){
