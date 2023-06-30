@@ -70,4 +70,7 @@ public class Usuario implements UserDetails {
     private Endereco endereco;
 
 
+    public Usuario(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
