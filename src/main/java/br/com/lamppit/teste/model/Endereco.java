@@ -22,5 +22,9 @@ public class Endereco {
     private String bairro;
     private String localidade;
 
-
+    public Endereco(String cep, String numero, String complemento) {
+        this.cep = cep;
+        this.numero = numero;
+        this.complemento = complemento;
+    }
 }

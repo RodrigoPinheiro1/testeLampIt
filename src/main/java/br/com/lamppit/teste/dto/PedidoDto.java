@@ -4,6 +4,7 @@ import br.com.lamppit.teste.model.Entregador;
 import br.com.lamppit.teste.model.FormaEntrega;
 import br.com.lamppit.teste.model.FormaPagamento;
 import br.com.lamppit.teste.model.Status;
+import br.com.lamppit.teste.model.situacao.SituacaoPedido;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

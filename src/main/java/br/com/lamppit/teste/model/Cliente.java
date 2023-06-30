@@ -19,8 +19,14 @@ public class Cliente extends Usuario {
     private Long id;
 
     private String nome;
-    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
 
+    public Cliente(Endereco endereco,String nome) {
 
+
+        super(endereco);
+        this.nome = nome;
+
+    }
 }
