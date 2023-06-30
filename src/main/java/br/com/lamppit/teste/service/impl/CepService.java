@@ -1,6 +1,7 @@
 package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.EnderecoDto;
+import br.com.lamppit.teste.exceptions.NotFound.CepNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,10 +11,15 @@ public class CepService {
 
     public EnderecoDto viaCep (EnderecoDto enderecoDto){
 
-        RestTemplate template = new RestTemplate();
+        try {
 
-        String uri = "https://viacep.com.br/ws/" + enderecoDto.getCep()+"/json/";
+            RestTemplate template = new RestTemplate();
 
-        return template.getForObject(uri, EnderecoDto.class);
+            String uri = "https://viacep.com.br/ws/" + enderecoDto.getCep() + "/json/";
+            return template.getForObject(uri, EnderecoDto.class);
+
+        }catch (Exception e){
+            throw new CepNotFoundException();
+        }
     }
 }
