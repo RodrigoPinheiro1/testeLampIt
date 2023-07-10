@@ -6,20 +6,16 @@ import br.com.lamppit.teste.model.Cliente;
 import br.com.lamppit.teste.model.Endereco;
 import br.com.lamppit.teste.repository.ClienteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ClienteServiceTest {
@@ -57,7 +53,9 @@ class ClienteServiceTest {
     void setUp() {
 
         enderecoDto = new EnderecoDto("08568000", "2393", "aa");
-        clienteDto = new ClienteDto(enderecoDto,"aaa");
+        clienteDto = new ClienteDto(enderecoDto, "aaa");
+
+
 
     }
 
@@ -68,7 +66,7 @@ class ClienteServiceTest {
 
         when(modelMapper.map(clienteDto, Cliente.class)).thenReturn(cliente);
         enderecoDto = cepService.viaCep(enderecoDto);
-        when(modelMapper.map(enderecoDto,Endereco.class)).thenReturn(endereco);
+        when(modelMapper.map(enderecoDto, Endereco.class)).thenReturn(endereco);
 
         when(clienteRepository.save(cliente)).thenReturn(cliente);
 
@@ -77,9 +75,8 @@ class ClienteServiceTest {
         ClienteDto dto = clienteService.cadastrarCliente(clienteDto);
 
 
-        assertEquals(dto,clienteDto);
-        verify(clienteRepository,times(1)).save(cliente);
-
+        assertEquals(dto, clienteDto);
+        verify(clienteRepository, times(1)).save(cliente);
 
 
     }
