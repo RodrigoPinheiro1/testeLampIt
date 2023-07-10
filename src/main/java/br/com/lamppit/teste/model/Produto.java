@@ -28,4 +28,18 @@ public class Produto {
     private Pedido pedido;
 
 
+    public Produto(Long id, String nome, Integer quantidade, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.descricao = descricao;
+    }
+
+    public Produto(Long id, String nome, Integer quantidade, String descricao, Empresa empresa) {
+        this.id = id;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.descricao = descricao;
+        this.empresa = empresa;
+    }
 }

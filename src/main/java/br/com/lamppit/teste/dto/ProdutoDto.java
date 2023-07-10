@@ -21,6 +21,16 @@ public class ProdutoDto {
     private String descricao;
 
 
+    public ProdutoDto(Long id, String nome, Integer quantidade, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.descricao = descricao;
+    }
 
-
+    public ProdutoDto(String nome, Integer quantidade, String descricao) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.descricao = descricao;
+    }
 }

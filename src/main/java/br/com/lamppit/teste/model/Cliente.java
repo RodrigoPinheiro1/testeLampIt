@@ -29,4 +29,11 @@ public class Cliente extends Usuario {
         this.nome = nome;
 
     }
+    public Cliente(Long id,Endereco endereco,String nome) {
+
+        super(endereco);
+        this.id = id;
+        this.nome = nome;
+
+    }
 }

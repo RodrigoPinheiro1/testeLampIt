@@ -39,4 +39,18 @@ public class Empresa extends  Usuario {
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
     private List<Produto> produtos = new ArrayList<>();
 
+
+    public Empresa(String nome, String cnpj, Endereco endereco, StatusLoja statusLoja) {
+        super(endereco);
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.statusLoja = statusLoja;
+    }
+    public Empresa(Long id ,String nome, String cnpj, Endereco endereco, StatusLoja statusLoja) {
+        super(endereco);
+        this.id = id;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.statusLoja = statusLoja;
+    }
 }

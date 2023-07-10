@@ -31,6 +31,8 @@ public class Usuario implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfil = new ArrayList<>();
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return perfil;
