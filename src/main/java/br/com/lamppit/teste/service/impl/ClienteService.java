@@ -39,7 +39,6 @@ public class ClienteService {
 
         endereco.setComplemento(dto.getEndereco().getComplemento());
         endereco.setNumero(dto.getEndereco().getNumero());
-
         cliente.setEndereco(endereco);
 
         clienteRepository.save(cliente);
