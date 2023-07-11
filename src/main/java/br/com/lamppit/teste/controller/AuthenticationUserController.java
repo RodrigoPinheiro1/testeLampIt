@@ -6,12 +6,12 @@ import br.com.lamppit.teste.exceptions.AutenticacaoException;
 import br.com.lamppit.teste.model.Perfil;
 import br.com.lamppit.teste.service.impl.AuthenticationService;
 import io.swagger.annotations.Api;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,13 +24,14 @@ public class AuthenticationUserController {
     private AuthenticationService authenticationService;
 
     @PostMapping
-    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) throws AutenticacaoException {
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
 
 
-        TokenDto tokenDto = authenticationService.autenticar(form);
+
+        String token = authenticationService.autenticar(form);
 
 
-        return ResponseEntity.ok(tokenDto);
+        return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 
     }
 
