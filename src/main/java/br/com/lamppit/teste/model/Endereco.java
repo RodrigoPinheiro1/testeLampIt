@@ -1,11 +1,11 @@
 package br.com.lamppit.teste.model;
 
+import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor

@@ -7,6 +7,7 @@ import br.com.lamppit.teste.dto.PedidoDto;
 import br.com.lamppit.teste.dto.PedidoIdDto;
 import br.com.lamppit.teste.service.impl.EntregadorService;
 import br.com.lamppit.teste.service.impl.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
+
 import java.net.URI;
 
 @RestController

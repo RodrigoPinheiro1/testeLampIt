@@ -1,15 +1,12 @@
 package br.com.lamppit.teste.model;
 
-import br.com.lamppit.teste.dto.EntregadorDto;
-import br.com.lamppit.teste.model.situacao.Cadastrado;
-import br.com.lamppit.teste.model.situacao.EmAnalise;
 import br.com.lamppit.teste.model.situacao.SituacaoPedido;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

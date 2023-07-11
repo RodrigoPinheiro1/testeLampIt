@@ -3,13 +3,12 @@ package br.com.lamppit.teste.controller;
 import br.com.lamppit.teste.dto.ProdutoDto;
 import br.com.lamppit.teste.dto.ProdutoEmpresaDto;
 import br.com.lamppit.teste.service.impl.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
