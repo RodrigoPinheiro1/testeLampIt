@@ -1,51 +1,51 @@
 package br.com.lamppit.teste.security;
 
 import br.com.lamppit.teste.model.Usuario;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Service
 public class TokenService {
-    @Value("864000") //milisegundos
-    private String expiration;
+
     @Value("${forum.jwt.secret}")
     private String secret;
 
-
-    public String gerarToken(Authentication authentication) {
-        Usuario logado = (Usuario) authentication.getPrincipal();
-        Date hoje = new Date();
-        Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
-        return Jwts.builder()
-                .setIssuer("VarejoOnline") //qual aplicação está gerando o token
-                .setSubject(logado.getId().toString())  //dono de quem pertence a sessao
-                .setIssuedAt(hoje) //data quando foi gerado
-                .setExpiration(dataExpiracao) //tempo de expiração
-                .signWith(SignatureAlgorithm.HS256, secret) // HS256,ger;a o algoritmo de cripografia   cripocrafia do token obs "buscar um programa que faça uma senha aleatoria grande de numeros"
-                .compact(); //compacta tudo,
-
-    }
-
-    public boolean isTokenValido(String token) {
+    public String gerarToken(Usuario usuario) {
         try {
-
-            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);//converte o token,  claimns passa o token
-        } catch (Exception e) {
-            return false;
+            var algoritmo = Algorithm.HMAC256(secret);
+            return JWT.create()
+                    .withIssuer("API Voll.med")
+                    .withSubject(usuario.getEmail())
+                    .withExpiresAt(dataExpiracao())
+                    .sign(algoritmo);
+        } catch (JWTCreationException exception){
+            throw new RuntimeException("erro ao gerar token jwt", exception);
         }
-        return true;
-
     }
 
-    public Long getId(String token) {
-
-        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
-        return Long.parseLong(claims.getSubject());
+    public String getSubject(String tokenJWT) {
+        try {
+            var algoritmo = Algorithm.HMAC256(secret);
+            return JWT.require(algoritmo)
+                    .withIssuer("API Voll.med")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Token JWT inválido ou expirado!");
+        }
     }
+
+    private Instant dataExpiracao() {
+        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+    }
+
 }
