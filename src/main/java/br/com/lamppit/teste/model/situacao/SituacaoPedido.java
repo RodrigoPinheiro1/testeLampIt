@@ -3,8 +3,8 @@ package br.com.lamppit.teste.model.situacao;
 
 import br.com.lamppit.teste.exceptions.Status.StatusPedidoException;
 import br.com.lamppit.teste.model.Pedido;
+import jakarta.persistence.Embeddable;
 
-import javax.persistence.Embeddable;
 
 @Embeddable
 public abstract class SituacaoPedido {
