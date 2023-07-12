@@ -3,6 +3,7 @@ package br.com.lamppit.teste.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jdk.jfr.Name;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class LoginForm {
 
     @NotNull
