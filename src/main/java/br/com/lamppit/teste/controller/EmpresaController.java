@@ -16,7 +16,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/empresa")
-@Profile({"test","dev","prod"})
+@Profile({"test", "dev", "prod"})
 public class EmpresaController {
 
 
@@ -24,11 +24,11 @@ public class EmpresaController {
     private EmpresaServiceImpl empresaService;
 
     @Autowired
-    private PedidoService produtoService;
+    private PedidoService pedidoService;
 
 
     @PostMapping
-    public ResponseEntity<EmpresaProdutoDto> cadastrarEmpresa(@RequestBody @Valid EmpresaProdutoDto dto, UriComponentsBuilder builder){
+    public ResponseEntity<EmpresaProdutoDto> cadastrarEmpresa(@RequestBody @Valid EmpresaProdutoDto dto, UriComponentsBuilder builder) {
 
         EmpresaProdutoDto empresaDto = empresaService.cadastrarEmpresa(dto);
 
@@ -36,21 +36,14 @@ public class EmpresaController {
         return ResponseEntity.created(uri).body(empresaDto);
 
     }
-
-        @GetMapping("/pedido/andamento")
-    public Page<PedidoDto> pedidosStatusEmAndamento(Pageable pageable) {
-        return produtoService.pedidosStatusEmAndamento(pageable);
-    }
-
-
     @GetMapping
-    public Page<EmpresaProdutoDto> EmpresasDisponiveis (Pageable pageable) {
+    public Page<EmpresaProdutoDto> EmpresasDisponiveis(Pageable pageable) {
 
         return empresaService.EmpresasDisponiveis(pageable);
     }
 
     @PatchMapping("/fechar/{id}")
-    public ResponseEntity<EmpresaDto> fecharLoja (@PathVariable Long id){
+    public ResponseEntity<EmpresaDto> fecharLoja(@PathVariable Long id) {
 
         EmpresaDto empresaDto = empresaService.fecharLoja(id);
 
@@ -59,7 +52,7 @@ public class EmpresaController {
     }
 
     @PatchMapping("/abrir/{id}")
-    public ResponseEntity<EmpresaDto> abrirLoja (@PathVariable Long id){
+    public ResponseEntity<EmpresaDto> abrirLoja(@PathVariable Long id) {
 
         EmpresaDto empresaDto = empresaService.abrirLoja(id);
 

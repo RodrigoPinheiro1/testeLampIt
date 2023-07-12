@@ -40,11 +40,7 @@ public class ClienteController {
 
     }
 
-    @GetMapping("/pedido/naoEntregue")
-    public Page<PedidoDto> pedidosNaoEntregues (Pageable pageable) {
 
-        return produtoService.pedidosNaoEntregues(pageable);
-    }
 
 
 }

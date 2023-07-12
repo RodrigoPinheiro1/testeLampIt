@@ -32,6 +32,18 @@ public class PedidoController {
         URI uri = builder.path("/pedido/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(pedidoDto);
 
+
+    }
+
+    @GetMapping("/pedido/andamento")
+    public Page<PedidoDto> pedidosStatusEmAndamento(Pageable pageable) {
+        return pedidoService.pedidosStatusEmAndamento(pageable);
+    }
+
+    @GetMapping("naoEntregue")
+    public Page<PedidoDto> pedidosNaoEntregues (Pageable pageable) {
+
+        return pedidoService.pedidosNaoEntregues(pageable);
     }
 
     @GetMapping
