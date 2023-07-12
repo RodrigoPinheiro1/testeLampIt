@@ -38,11 +38,6 @@ class PedidoServiceTest {
     @MockBean
     private EmpresaRepository empresaRepository;
 
-    @MockBean
-    private ProdutoRepository produtoRepository;
-
-    @Mock
-    private ProdutoDto produtoDto;
 
     @Mock
     private PedidoEmpresaIdDto pedidoEmpresaIdDto;
@@ -69,13 +64,9 @@ class PedidoServiceTest {
     @Mock
     private PedidoRepository pedidoRepository;
 
-    @Mock
-    private ProdutoEmpresaDto produtoEmpresaDto;
 
     @MockBean
     private ProdutoDtoId produtoDtoId;
-    @Mock
-    private NotFoundService notFoundService;
 
     @Mock
     private Pageable pageable;
