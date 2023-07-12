@@ -141,12 +141,25 @@ class EmpresaControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.patch(uri+"/fechar/"+empresa.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+    @Test
+    void shouldReturnNotFoundStore() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.patch(uri+"/fechar/00000"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 
     @Test
-    void abrirLoja() throws Exception {
+    void shouldOpenStore() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.patch(uri+"/abrir/"+empresa.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+    @Test
+    void shouldReturnNotFoundOpenStore() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.patch(uri+"/abrir/000"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
     }
 }
