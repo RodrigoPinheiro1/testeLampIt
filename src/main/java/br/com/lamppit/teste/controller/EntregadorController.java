@@ -21,6 +21,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/entregador")
+@Profile({"test","dev","prod"})
 public class EntregadorController {
 
 

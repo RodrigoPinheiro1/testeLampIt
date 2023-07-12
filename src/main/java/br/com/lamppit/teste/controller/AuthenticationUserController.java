@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/auth")
 @Api(tags = "Auth controller")
+@Profile("prod")
 public class AuthenticationUserController {
 
 

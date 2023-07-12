@@ -16,6 +16,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/empresa")
+@Profile({"test","dev","prod"})
 public class EmpresaController {
 
 
