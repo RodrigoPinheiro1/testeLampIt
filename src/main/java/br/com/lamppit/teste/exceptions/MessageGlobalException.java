@@ -2,7 +2,7 @@ package br.com.lamppit.teste.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class MessageGlobalException {
 
     private LocalDateTime data;
@@ -19,7 +20,7 @@ public class MessageGlobalException {
 
     private String message;
 
-    private List<ValidacaoDto> validacaoDtos = new ArrayList<>();
+    private List<ErrorValidation> errorValidation = new ArrayList<>();
 
 
     public MessageGlobalException(LocalDateTime data, Integer status) {
@@ -32,4 +33,6 @@ public class MessageGlobalException {
         this.status = status;
         this.message = message;
     }
+
+
 }
