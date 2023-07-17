@@ -23,4 +23,5 @@ public class Entregador extends Usuario {
     private List<Pedido> pedidos = new ArrayList<>();
 
 
+
 }

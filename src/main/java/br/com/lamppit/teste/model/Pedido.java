@@ -1,5 +1,6 @@
 package br.com.lamppit.teste.model;
 
+import br.com.lamppit.teste.model.situacao.Cadastrado;
 import br.com.lamppit.teste.model.situacao.SituacaoPedido;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -49,6 +50,16 @@ public class Pedido {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<Produto> produtos = new ArrayList<>();
 
+    public Pedido(LocalDateTime dataPedido, Status status, FormaPagamento formaPagamento, FormaEntrega formaEntrega,  SituacaoPedido situacaoPedido,
+                  Cliente cliente, Empresa empresa, List<Produto> produtos) {
+        this.dataPedido = dataPedido;
+        this.status = status;
+        this.formaPagamento = formaPagamento;
+        this.formaEntrega = formaEntrega;
+        this.cliente = cliente;
+        this.empresa = empresa;
+        this.produtos = produtos;
+    }
 
     public void cadastro() {
         this.situacaoPedido.cadastrado(this);

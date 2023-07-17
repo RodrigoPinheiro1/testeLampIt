@@ -23,7 +23,6 @@ public class PedidoEmpresaIdDto {
 
     private Long id;
 
-
     @Future
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataPedido;
@@ -36,7 +35,6 @@ public class PedidoEmpresaIdDto {
 
     @NotNull
     private Long empresaId;
-
 
     @NotNull
     @Valid
