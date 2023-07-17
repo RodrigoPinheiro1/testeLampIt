@@ -23,7 +23,7 @@ public class AguardarConfirmarEntregaException extends RuntimeException {
         MessageGlobalException messageGlobalException = new MessageGlobalException(LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(), "Aguardar Entregador Confirmar Entrega");
 
-        return new ResponseEntity<>(messageGlobalException, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(messageGlobalException, HttpStatus.BAD_REQUEST);
     }
 
 
