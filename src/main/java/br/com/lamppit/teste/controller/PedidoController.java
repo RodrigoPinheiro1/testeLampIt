@@ -35,12 +35,12 @@ public class PedidoController {
 
     }
 
-    @GetMapping("/pedido/andamento")
+    @GetMapping("/andamento")
     public Page<PedidoDto> pedidosStatusEmAndamento(Pageable pageable) {
         return pedidoService.pedidosStatusEmAndamento(pageable);
     }
 
-    @GetMapping("naoEntregue")
+    @GetMapping("/naoEntregue")
     public Page<PedidoDto> pedidosNaoEntregues (Pageable pageable) {
 
         return pedidoService.pedidosNaoEntregues(pageable);
@@ -52,14 +52,14 @@ public class PedidoController {
         return pedidoService.pedidos(pageable);
     }
 
-    @PatchMapping("/empresa/statusEmAtendimento/{id}")
+    @PatchMapping("/statusEmAtendimento/{id}")
     public ResponseEntity<PedidoDto> atualizaPedidoParaEmAtendimento(@PathVariable Long id) {
 
         PedidoDto pedidoDto = pedidoService.atualizarPedidoParaEmAtendimento(id);
 
         return ResponseEntity.ok(pedidoDto);
     }
-    @PatchMapping("/empresa/statusConcluido/{id}")
+    @PatchMapping("/statusConcluido/{id}")
     public ResponseEntity<PedidoDto> atualizaPedidoParaConcluido(@PathVariable Long id) {
 
         PedidoDto pedidoDto = pedidoService.atualizaPedidoParaConcluido(id);
@@ -70,19 +70,6 @@ public class PedidoController {
 
 
 
-//    @PatchMapping("/empresa/StatusEntregaConfirmada/{id}")
-//    public ResponseEntity<PedidoDto> atualizaPedidoParaEntregaConfirmada(@PathVariable Long id) {
-//
-//        PedidoDto pedidoDto = pedidoService.atualizaPedidoParaEntregaConfirmada(id);
-//
-//        return ResponseEntity.ok(pedidoDto);
-//    }
-//    @PatchMapping("/empresa/StatusEntregue/{id}")
-//    public ResponseEntity<PedidoDto> atualizaPedidoParaEntregue(@PathVariable Long id) {
-//
-//        PedidoDto pedidoDto = pedidoService.atualizaPedidoParaEntregue(id);
-//
-//        return ResponseEntity.ok(pedidoDto);
-//    }
+
 
 }
