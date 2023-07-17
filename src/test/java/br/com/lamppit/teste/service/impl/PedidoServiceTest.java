@@ -1,6 +1,8 @@
 package br.com.lamppit.teste.service.impl;
 
-import br.com.lamppit.teste.dto.*;
+import br.com.lamppit.teste.dto.PedidoDto;
+import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
+import br.com.lamppit.teste.dto.ProdutoDtoId;
 import br.com.lamppit.teste.exceptions.EmpresaFechadaException;
 import br.com.lamppit.teste.exceptions.NotFound.ClienteNotFoundException;
 import br.com.lamppit.teste.exceptions.NotFound.EmpresaNotFoundException;
@@ -9,30 +11,27 @@ import br.com.lamppit.teste.model.situacao.Cadastrado;
 import br.com.lamppit.teste.repository.ClienteRepository;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.PedidoRepository;
-import br.com.lamppit.teste.repository.ProdutoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class PedidoServiceTest {
 
     @MockBean
@@ -86,7 +85,7 @@ class PedidoServiceTest {
         endereco = new Endereco("08568000", "2393", "aa");
         cliente = new Cliente(1L, endereco, "aaa");
         entregador = new Entregador(1L, "aaa", Collections.singletonList(pedido));
-        empresa = new Empresa(1L, "sad", "59.291.534/0001-67", endereco, StatusLoja.ABERTO);
+        empresa = new Empresa("sad", "59.291.534/0001-67", endereco, StatusLoja.ABERTO);
         produto = new Produto(1L, "ads", 1, "ads", empresa);
         produtoDtoId = new ProdutoDtoId(1L);
         pedido = new Pedido(1L, LocalDateTime.now(), Status.CADASTRADO,
