@@ -21,6 +21,9 @@ public class ProdutoService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
+
+    @Autowired
+    private NotFoundService notFoundService;
     @Autowired
     private ProdutoRepository produtoRepository;
 
@@ -29,6 +32,8 @@ public class ProdutoService {
 
         Produto produto = modelMapper.map(dto, Produto.class);
 
+
+        notFoundService.seExisteEmpresa(id);
 
         Empresa empresa = empresaRepository.getReferenceById(id);
 

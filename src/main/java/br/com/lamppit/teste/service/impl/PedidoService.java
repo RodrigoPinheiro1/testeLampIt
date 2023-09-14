@@ -2,14 +2,13 @@ package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.PedidoDto;
 import br.com.lamppit.teste.dto.PedidoEmpresaIdDto;
-import br.com.lamppit.teste.exceptions.AguardarConfirmarEntregaException;
 import br.com.lamppit.teste.exceptions.EmpresaFechadaException;
-import br.com.lamppit.teste.exceptions.Status.StatusPedidoException;
 import br.com.lamppit.teste.model.Cliente;
 import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Pedido;
-import br.com.lamppit.teste.model.Status;
-import br.com.lamppit.teste.model.situacao.*;
+import br.com.lamppit.teste.model.situacao.Cadastrado;
+import br.com.lamppit.teste.model.situacao.EmAnalise;
+import br.com.lamppit.teste.model.situacao.EmAtendimento;
 import br.com.lamppit.teste.repository.ClienteRepository;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.PedidoRepository;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Objects;
 
 @Service
 public class PedidoService {
