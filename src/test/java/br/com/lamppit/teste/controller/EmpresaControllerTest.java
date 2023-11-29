@@ -71,6 +71,7 @@ class EmpresaControllerTest {
 
     @BeforeEach
     void setUp() {
+
         produto = new Produto("ads", 1, "ads", empresa);
         empresa = new Empresa("sad", "59.291.534/0001-67", endereco, StatusLoja.ABERTO);
         endereco = new Endereco("08568000", "2393", "aa");
@@ -80,7 +81,6 @@ class EmpresaControllerTest {
         enderecoDto = new EnderecoDto("08568000", "2393", "aa");
         empresaProdutoDto = new EmpresaProdutoDto(1L, "nome", "59.291.534/0001-67", "email",
                 enderecoDto, StatusLoja.ABERTO, Collections.singletonList(produtoDto));
-
 
     }
 

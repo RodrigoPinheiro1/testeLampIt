@@ -1,8 +1,8 @@
 package br.com.lamppit.teste.controller;
 
-import br.com.lamppit.teste.dto.*;
+import br.com.lamppit.teste.dto.EmpresaDto;
+import br.com.lamppit.teste.dto.EmpresaProdutoDto;
 import br.com.lamppit.teste.service.impl.EmpresaServiceImpl;
-import br.com.lamppit.teste.service.impl.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -23,8 +23,6 @@ public class EmpresaController {
     @Autowired
     private EmpresaServiceImpl empresaService;
 
-    @Autowired
-    private PedidoService pedidoService;
 
 
     @PostMapping
@@ -37,7 +35,7 @@ public class EmpresaController {
 
     }
     @GetMapping
-    public Page<EmpresaProdutoDto> EmpresasDisponiveis(Pageable pageable) {
+    public Page<EmpresaProdutoDto> procurarEmpresas(Pageable pageable) {
 
         return empresaService.EmpresasDisponiveis(pageable);
     }

@@ -1,13 +1,12 @@
 package br.com.lamppit.teste.service.impl;
 
-import br.com.lamppit.teste.dto.EnderecoDto;
 import br.com.lamppit.teste.dto.ProdutoDto;
 import br.com.lamppit.teste.dto.ProdutoEmpresaDto;
-import br.com.lamppit.teste.exceptions.EmpresaFechadaException;
-import br.com.lamppit.teste.exceptions.GlobalCustomException;
-import br.com.lamppit.teste.exceptions.NotFound.CepNotFoundException;
 import br.com.lamppit.teste.exceptions.NotFound.EmpresaNotFoundException;
-import br.com.lamppit.teste.model.*;
+import br.com.lamppit.teste.model.Empresa;
+import br.com.lamppit.teste.model.Endereco;
+import br.com.lamppit.teste.model.Produto;
+import br.com.lamppit.teste.model.StatusLoja;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.ProdutoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,15 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.Mockito.isNull;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class ProdutoServiceTest {
@@ -52,7 +48,7 @@ class ProdutoServiceTest {
     private ProdutoEmpresaDto produtoEmpresaDto;
 
     @InjectMocks
-    private NotFoundService notFoundService;
+    private FinByIdService finByIdService;
     @Mock
     private Produto produto;
     @Mock

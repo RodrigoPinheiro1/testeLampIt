@@ -32,7 +32,6 @@ public class PedidoController {
         URI uri = builder.path("/pedido/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(pedidoDto);
 
-
     }
 
     @GetMapping("/andamento")

@@ -6,36 +6,27 @@ import br.com.lamppit.teste.model.Empresa;
 import br.com.lamppit.teste.model.Produto;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ProdutoService {
 
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
+    private final FinByIdService finByIdService;
 
-    @Autowired
-    private EmpresaRepository empresaRepository;
-
-
-    @Autowired
-    private NotFoundService notFoundService;
-    @Autowired
-    private ProdutoRepository produtoRepository;
+    private final ProdutoRepository produtoRepository;
 
 
     public ProdutoEmpresaDto cadastrarProduto(ProdutoDto dto, Long id) {
 
         Produto produto = modelMapper.map(dto, Produto.class);
 
-
-        notFoundService.seExisteEmpresa(id);
-
-        Empresa empresa = empresaRepository.getReferenceById(id);
+        Empresa empresa = finByIdService.seExisteEmpresa(id);
 
         produto.setEmpresa(empresa);
 
