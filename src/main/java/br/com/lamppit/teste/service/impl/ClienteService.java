@@ -5,33 +5,29 @@ import br.com.lamppit.teste.dto.EnderecoDto;
 import br.com.lamppit.teste.model.Cliente;
 import br.com.lamppit.teste.model.Endereco;
 import br.com.lamppit.teste.repository.ClienteRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ClienteService {
 
 
-    @Autowired
-    private NotFoundService notFoundService;
+    private final FinByIdService finByIdService;
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
 
+    private final CepService cepService;
 
-    @Autowired
-    private CepService cepService;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
 
     public ClienteDto cadastrarCliente(ClienteDto dto) {
 
         Cliente cliente = modelMapper.map(dto, Cliente.class);
 
-        EnderecoDto enderecoDto = cepService.viaCep(dto.getEndereco());
+        EnderecoDto enderecoDto = cepService.viaCep(dto.getEndereco()).block();
 
         Endereco endereco = modelMapper.map(enderecoDto, Endereco.class);
 

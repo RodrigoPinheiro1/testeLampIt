@@ -13,45 +13,38 @@ import br.com.lamppit.teste.repository.ClienteRepository;
 import br.com.lamppit.teste.repository.EmpresaRepository;
 import br.com.lamppit.teste.repository.PedidoRepository;
 import br.com.lamppit.teste.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PedidoService {
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private NotFoundService notFoundService;
-    @Autowired
-    private ProdutoRepository produtoRepository;
-
-    @Autowired
-    private EmpresaRepository empresaRepository;
-
-    @Autowired
-    private ClienteRepository clienteRepository;
 
 
-    @Autowired
-    private PedidoRepository pedidoRepository;
+    private final ModelMapper modelMapper;
+    private final FinByIdService finByIdService;
+    private final ProdutoRepository produtoRepository;
+
+    private final EmpresaRepository empresaRepository;
+
+    private final ClienteRepository clienteRepository;
+
+    private final PedidoRepository pedidoRepository;
 
 
     public PedidoDto cadastrarPedido(PedidoEmpresaIdDto dto, Long idCliente) {
 
         Pedido pedido = modelMapper.map(dto, Pedido.class);
 
-        notFoundService.seExisteEmpresa(dto.getEmpresaId());
-        notFoundService.seClienteExiste(idCliente);
+        Empresa empresa = finByIdService.seExisteEmpresa(dto.getEmpresaId());
+        Cliente cliente = finByIdService.seClienteExiste(idCliente);
 
-        Cliente cliente = clienteRepository.getReferenceById(idCliente);
-        Empresa empresa = empresaRepository.getReferenceById(dto.getEmpresaId());
 
         empresaRepository.seEmpresaEstaAberto(dto.getEmpresaId()).orElseThrow(EmpresaFechadaException::new);
 
@@ -64,10 +57,10 @@ public class PedidoService {
 
         pedido.getProdutos().forEach(produto ->
         {
-            notFoundService.seProdutoExiste(produto.getId());
+            finByIdService.seProdutoExiste(produto.getId());
             produto = produtoRepository.getReferenceById(produto.getId());
             produto.setPedido(pedido);
-            pedido.setProdutos(Collections.singletonList(produto));
+            pedido.setProdutos(List.of(produto));
         });
 
         pedidoRepository.save(pedido);
@@ -111,8 +104,8 @@ public class PedidoService {
 
 
     public Pedido verificaPedido(Long id) {
-        notFoundService.sePedidoExiste(id);
-        return pedidoRepository.getReferenceById(id);
+        return finByIdService.sePedidoExiste(id);
+
     }
 
 

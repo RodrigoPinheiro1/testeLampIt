@@ -65,7 +65,7 @@ class ClienteServiceTest {
 
 
         when(modelMapper.map(clienteDto, Cliente.class)).thenReturn(cliente);
-        enderecoDto = cepService.viaCep(enderecoDto);
+        enderecoDto = cepService.viaCep(enderecoDto).block();
         when(modelMapper.map(enderecoDto, Endereco.class)).thenReturn(endereco);
 
         when(clienteRepository.save(cliente)).thenReturn(cliente);

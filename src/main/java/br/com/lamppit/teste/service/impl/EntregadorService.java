@@ -1,49 +1,37 @@
 package br.com.lamppit.teste.service.impl;
 
 import br.com.lamppit.teste.dto.*;
-import br.com.lamppit.teste.exceptions.Status.StatusPedidoException;
 import br.com.lamppit.teste.model.Endereco;
 import br.com.lamppit.teste.model.Entregador;
 import br.com.lamppit.teste.model.Pedido;
 import br.com.lamppit.teste.model.situacao.Concluido;
-import br.com.lamppit.teste.model.situacao.EmAtendimento;
 import br.com.lamppit.teste.model.situacao.EntregaConfirmada;
-import br.com.lamppit.teste.model.situacao.Entregue;
 import br.com.lamppit.teste.repository.EntregadorRepository;
 import br.com.lamppit.teste.repository.PedidoRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-import static br.com.lamppit.teste.model.Status.ENTREGA_CONFIRMADA;
-
 @Service
+@RequiredArgsConstructor
 public class EntregadorService {
 
-    @Autowired
-    private EntregadorRepository entregadorRepository;
+    private final EntregadorRepository entregadorRepository;
 
+    private final FinByIdService finByIdService;
+    private final PedidoService pedidoService;
+    private final PedidoRepository pedidoRepository;
+    private final CepService cepService;
 
-    @Autowired
-    private NotFoundService notFoundService;
-    @Autowired
-    private PedidoService pedidoService;
-    @Autowired
-    private PedidoRepository pedidoRepository;
-    @Autowired
-    private CepService cepService;
-
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public EntregadorDto cadastrarEntregador(EntregadorDto dto) {
 
         Entregador entregador = modelMapper.map(dto, Entregador.class);
 
-        EnderecoDto enderecoDto = cepService.viaCep(dto.getEndereco());
+        EnderecoDto enderecoDto = cepService.viaCep(dto.getEndereco()).block();
 
         Endereco endereco = modelMapper.map(enderecoDto, Endereco.class);
 
@@ -61,15 +49,14 @@ public class EntregadorService {
     }
 
 
-    public EntregadorPedidoDto aceitarDelivery(PedidoIdDto dto, Long id) {
+    public EntregadorPedidoDto aceitarDelivery(PedidoIdDto dto, Long idEntregador) {
 
         Pedido pedido = modelMapper.map(dto, Pedido.class);
 
-        notFoundService.sePedidoExiste(pedido.getId());
-        notFoundService.seEntregadorExiste(id);
 
-        pedido = pedidoRepository.getReferenceById(pedido.getId());
-        Entregador entregador = entregadorRepository.getReferenceById(id);
+        Entregador entregador = finByIdService.seEntregadorExiste(idEntregador);
+
+        pedido =  finByIdService.sePedidoExiste(pedido.getId());
 
         pedido.setId(pedido.getId());
 
@@ -78,7 +65,7 @@ public class EntregadorService {
 
         pedido.setEntregador(entregador);
 
-        entregador.setId(id);
+        entregador.setId(idEntregador);
         entregador.setNome(entregador.getNome());
         entregador.setPedidos(Collections.singletonList(pedido));
 
